@@ -1,0 +1,932 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ahmad Jamal · Skills</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    
+    /* Light mode variables (silver-grey theme) */
+    :root {
+      --bg: #f2f6fc;
+      --bg-gradient: linear-gradient(160deg, rgba(242,246,252,0.97) 0%, rgba(230,240,250,0.95) 100%);
+      --text: #1d2b3c;
+      --text-light: #4f6f8f;
+      --glass: rgba(255,255,255,0.85);
+      --glass2: rgba(255,255,255,0.7);
+      --border: rgba(143,177,208,0.2);
+      --border2: rgba(143,177,208,0.3);
+      --accent: #5f9ea0;
+      --accent2: #4a7d7f;
+      --silver: #6f8faf;
+      --silver2: #5f82a8;
+      --muted: #6f8faf;
+      --card-bg: #ffffff;
+      --shadow: rgba(0,0,0,0.05);
+      --navy: #f2f6fc;
+    }
+
+    /* Dark mode variables */
+    body.dark-mode {
+      --bg: #0f1724;
+      --bg-gradient: linear-gradient(160deg, rgba(8,16,32,0.97) 0%, rgba(13,24,42,0.95) 100%);
+      --text: #eef3fd;
+      --text-light: #adc4e2;
+      --glass: rgba(16,30,52,0.85);
+      --glass2: rgba(24,44,72,0.6);
+      --border: rgba(65,100,140,0.2);
+      --border2: rgba(65,100,140,0.3);
+      --accent: #7fc4c7;
+      --accent2: #5ba8c4;
+      --silver: #8fb1d0;
+      --silver2: #c0d6f0;
+      --muted: rgba(192,214,240,0.55);
+      --card-bg: #1a283c;
+      --shadow: rgba(0,0,0,0.3);
+      --navy: #0d1826;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.25s ease;
+    }
+
+    /* ── BG ── */
+    .skills-bg { position:fixed; inset:0; z-index:-1; overflow:hidden; }
+    .skills-bg img { width:100%; height:100%; object-fit:cover; opacity:0.1; animation:zoomBg 28s ease-in-out infinite; }
+    @keyframes zoomBg { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
+    .skills-bg::after {
+      content:''; position:absolute; inset:0;
+      background: var(--bg-gradient);
+      transition: background 0.3s ease;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar-custom {
+      backdrop-filter:blur(16px) saturate(200%);
+      background:rgba(255,255,255,0.75);
+      box-shadow:0 8px 24px -12px rgba(60,80,105,0.15);
+      padding:0.6rem 2.5rem;
+      border-bottom:1px solid rgba(255,255,255,0.6);
+      position:sticky; top:0; z-index:1050; transition:background 0.3s;
+    }
+    body.dark-mode .navbar-custom { background:rgba(10,20,30,0.88); border-bottom:1px solid #253c54; }
+    .nav-container { display:flex; align-items:center; justify-content:space-between; max-width:1600px; margin:0 auto; }
+    .brand-logo { display:flex; align-items:center; gap:12px; text-decoration:none; transition:transform 0.3s; }
+    .brand-logo:hover { transform:scale(1.02) translateX(4px); }
+    .logo-block {
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(145deg,#1f3a52,#2b5075);
+      width:56px; height:56px; border-radius:30% 70% 70% 30% / 30% 50% 50% 70%;
+      box-shadow:0 12px 20px -12px #2f4b6e; color:white; font-size:30px; font-weight:700;
+      animation:morphLogo 8s ease-in-out infinite;
+    }
+    @keyframes morphLogo {
+      0%,100%{border-radius:30% 70% 70% 30%/30% 50% 50% 70%}
+      33%{border-radius:50% 50% 40% 60%/60% 40% 60% 40%}
+      66%{border-radius:70% 30% 50% 50%/40% 60% 40% 60%}
+    }
+    .brand-text { font-size:2.2rem; font-weight:700; color:#1f3a52; letter-spacing:-0.02em; transition:color 0.2s; }
+    body.dark-mode .brand-text { color:#d0e2ff; }
+    .nav-center { display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:center; }
+    .nav-btn {
+      background:transparent; border:none; padding:12px 24px; font-size:1.3rem;
+      font-weight:550; color:#2b4058; border-radius:40px; text-decoration:none;
+      white-space:nowrap; transition:all 0.2s; position:relative;
+    }
+    body.dark-mode .nav-btn { color:#d0e2ff; }
+    .nav-btn:hover { background:rgba(70,110,160,0.06); transform:translateY(-2px); color:#0b2339; }
+    .nav-btn::after { content:''; position:absolute; bottom:6px; left:50%; width:0; height:3px; background:#8fb1d0; border-radius:4px; transform:translateX(-50%); transition:width 0.2s; }
+    .nav-btn:hover::after,.nav-btn.active::after { width:30%; }
+    .nav-btn.active { color:#2b5075; }
+    body.dark-mode .nav-btn.active { color:#7fc4c7; }
+    #theme-toggle { background:transparent; border:none; cursor:pointer; width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.25s; color:#2b4a70; }
+    #theme-toggle .material-symbols-outlined { font-size:32px; }
+    #theme-toggle:hover { background:rgba(130,170,210,0.15); transform:rotate(15deg) scale(1.1); }
+    body.dark-mode #theme-toggle { color:#ffdba0; }
+
+    /* ── HERO ── */
+    .hero { text-align:center; padding:5rem 2rem 3rem; position:relative; z-index:2; }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      background:var(--glass); border:1px solid var(--border2);
+      padding:0.45rem 1.3rem; border-radius:60px;
+      font-size:0.85rem; font-weight:500; color:var(--silver2);
+      margin-bottom:1.6rem; backdrop-filter:blur(10px);
+      opacity:0; animation:fadeUp 0.7s 0.1s forwards;
+    }
+    .hero-badge .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); animation:blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+    .hero-title {
+      font-size:clamp(2.6rem,5.5vw,4.2rem); font-weight:700; line-height:1.1; color:var(--text);
+      text-shadow:0 4px 30px rgba(0,0,0,0.1); margin-bottom:1rem;
+      opacity:0; animation:fadeUp 0.8s 0.25s forwards;
+    }
+    .hero-title em { font-style:italic; color:var(--accent); }
+    .hero-desc {
+      font-size:1.05rem; color:var(--text-light); max-width:580px; margin:0 auto 1.5rem; line-height:1.75;
+      opacity:0; animation:fadeUp 0.8s 0.4s forwards;
+    }
+
+    /* ── COUNTERS ROW ── */
+    .counters-row {
+      display:flex; justify-content:center; gap:3rem; flex-wrap:wrap;
+      margin-bottom:3.5rem; padding:0 2rem;
+      opacity:0; animation:fadeUp 0.9s 0.55s forwards;
+    }
+    .counter-item { text-align:center; }
+    .counter-num { font-size:2.4rem; font-weight:700; color:var(--accent); line-height:1; display:block; }
+    .counter-lbl { font-size:0.75rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.09em; margin-top:0.3rem; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── TABS ── */
+    .tabs-wrap {
+      display:flex; justify-content:center; flex-wrap:wrap; gap:0.55rem;
+      margin-bottom:3rem; padding:0 1rem;
+      position:relative; z-index:2;
+      opacity:0; animation:fadeUp 0.8s 0.65s forwards;
+    }
+    .tab-btn {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      padding:0.55rem 1.3rem; border-radius:50px;
+      border:1px solid var(--border); background:var(--glass);
+      color:var(--text); font-family:'Inter',sans-serif;
+      font-size:0.85rem; font-weight:600; cursor:pointer;
+      transition:all 0.25s; backdrop-filter:blur(8px);
+    }
+    .tab-btn:hover { border-color:var(--silver); color:var(--text); transform:translateY(-2px); }
+    .tab-btn.active {
+      background:var(--accent); color:white; border-color:var(--accent);
+      box-shadow:0 0 28px rgba(127,196,199,0.45);
+      transform:translateY(-2px);
+    }
+
+    /* ── MAIN ── */
+    .skills-main { max-width:1100px; margin:0 auto; padding:0 2rem 6rem; position:relative; z-index:2; }
+    .skill-section { display:none; }
+    .skill-section.active { display:block; }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:2.2rem; flex-wrap:wrap; gap:1rem;
+      padding-bottom:1.4rem;
+      border-bottom:1px solid var(--border);
+    }
+    .s-left { display:flex; align-items:center; gap:1.1rem; }
+    .s-icon {
+      width:58px; height:58px; border-radius:16px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.8rem; flex-shrink:0;
+    }
+    .s-title h2 { font-size:1.7rem; font-weight:700; color:var(--text); letter-spacing:-0.02em; }
+    .s-title p { font-size:0.83rem; color:var(--text-light); margin-top:0.25rem; }
+    .s-stat .num { font-size:2rem; font-weight:700; color:var(--accent); line-height:1; text-align:right; }
+    .s-stat .lbl { font-size:0.7rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.08em; text-align:right; }
+
+    /* ACCORDION SKILL ITEMS */
+    .accordion-list { display:flex; flex-direction:column; gap:0.7rem; }
+
+    .acc-item {
+      background:var(--glass);
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      backdrop-filter:blur(14px);
+      transition:border-color 0.3s, box-shadow 0.3s;
+    }
+    .acc-item.open { border-color:var(--border2); box-shadow:0 12px 40px var(--shadow); }
+
+    .acc-head {
+      display:flex; align-items:center; gap:1.1rem;
+      padding:1.25rem 1.6rem; cursor:pointer;
+      transition:background 0.2s;
+      user-select:none;
+    }
+    .acc-head:hover { background:rgba(143,177,208,0.05); }
+
+    .acc-emoji {
+      width:46px; height:46px; border-radius:13px;
+      background:rgba(127,196,199,0.08); border:1px solid rgba(127,196,199,0.15);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.35rem; flex-shrink:0;
+      transition:transform 0.3s;
+    }
+    .acc-item.open .acc-emoji { transform:scale(1.08); }
+
+    .acc-meta { flex:1; min-width:0; }
+    .acc-name { font-size:1rem; font-weight:700; color:var(--text); letter-spacing:-0.01em; }
+    .acc-tagline { font-size:0.78rem; color:var(--text-light); margin-top:0.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    .acc-right { display:flex; align-items:center; gap:1.2rem; flex-shrink:0; }
+    .acc-pct { font-size:1.2rem; font-weight:700; color:var(--accent); min-width:44px; text-align:right; }
+    .acc-mini-bar { width:80px; height:4px; background:rgba(143,177,208,0.12); border-radius:10px; overflow:hidden; }
+    .acc-mini-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:10px; width:0; transition:width 1.1s cubic-bezier(0.4,0,0.2,1); }
+
+    .acc-chevron {
+      width:28px; height:28px; border-radius:50%;
+      background:rgba(143,177,208,0.08);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; transition:transform 0.35s, background 0.2s;
+      color:var(--silver);
+    }
+    .acc-item.open .acc-chevron { transform:rotate(180deg); background:rgba(127,196,199,0.15); color:var(--accent); }
+
+    .acc-body { max-height:0; overflow:hidden; transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
+    .acc-item.open .acc-body { max-height:600px; }
+
+    .acc-inner {
+      padding:0 1.6rem 1.5rem 3.8rem;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:1.4rem;
+    }
+
+    .acc-sub-list { display:flex; flex-direction:column; gap:0.5rem; }
+    .sub-item {
+      display:flex; align-items:flex-start; gap:0.6rem;
+      font-size:0.82rem; color:var(--text-light); line-height:1.5;
+    }
+    .sub-bullet {
+      width:5px; height:5px; border-radius:50%;
+      background:var(--accent); flex-shrink:0; margin-top:6px; opacity:0.7;
+    }
+
+    .acc-detail { display:flex; flex-direction:column; gap:0.6rem; }
+    .detail-line {
+      display:flex; align-items:flex-start; gap:0.55rem;
+      font-size:0.8rem; color:var(--text-light); line-height:1.55;
+    }
+    .detail-line::before { content:'—'; color:var(--accent); font-size:0.72rem; flex-shrink:0; margin-top:1px; opacity:0.6; }
+
+    .acc-tags { display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:0.8rem; grid-column:1/-1; }
+    .tag {
+      padding:0.22rem 0.7rem; border-radius:20px;
+      background:rgba(127,196,199,0.08); border:1px solid rgba(127,196,199,0.18);
+      font-size:0.68rem; font-weight:600; color:var(--accent); letter-spacing:0.04em;
+    }
+
+    /* ── STAGGER ANIMATION ── */
+    .acc-item {
+      opacity:0; transform:translateY(18px);
+      transition:opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
+    }
+    .acc-item.revealed { opacity:1; transform:translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:900px) {
+      .nav-center { display:none; }
+      .navbar-custom { padding:0.6rem 1rem; }
+      .brand-text { font-size:1.6rem; }
+      .logo-block { width:44px; height:44px; font-size:22px; }
+      .acc-inner { grid-template-columns:1fr; }
+      .acc-mini-bar { display:none; }
+    }
+    @media (max-width:600px) {
+      .hero { padding:3rem 1.2rem 2rem; }
+      .skills-main { padding:0 1rem 4rem; }
+      .counters-row { gap:1.5rem; }
+      .acc-head { padding:1rem 1.2rem; gap:0.8rem; }
+      .acc-inner { padding:0 1.2rem 1.2rem 1.2rem; }
+      .section-header { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="skills-bg">
+    <img src="{% static 'images/skills-bg.jpeg' %}" alt="" onerror="this.style.display='none'">
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar-custom">
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <span class="logo-block">AJ</span>
+        <span class="brand-text">Ahmad Jamal</span>
+      </a>
+      <div class="nav-center">
+        <a href="/" class="nav-btn">Home</a>
+        <a href="/projects/" class="nav-btn">Projects</a>
+        <a href="/skills/" class="nav-btn active">Skills</a>
+        <a href="/services/" class="nav-btn">Services</a>
+        <a href="/about/" class="nav-btn">About</a>
+        <a href="/contact/" class="nav-btn">Contact</a>
+      </div>
+      <div>
+        <button id="theme-toggle" title="Toggle theme">
+          <span class="material-symbols-outlined">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge"><span class="dot"></span> 8 Specialisations · 40+ Skills</div>
+    <h1 class="hero-title">Skills That Drive<br><em>Real Results</em></h1>
+    <p class="hero-desc">From native Android to top-ranking SEO, content strategy to CRM — a full-stack of digital expertise built across 5+ years and 50+ projects.</p>
+  </section>
+
+  <!-- COUNTERS -->
+  <div class="counters-row">
+    <div class="counter-item"><span class="counter-num" data-target="50">0</span><span class="counter-lbl">Projects Done</span></div>
+    <div class="counter-item"><span class="counter-num" data-target="15">0</span><span class="counter-lbl">Countries</span></div>
+    <div class="counter-item"><span class="counter-num" data-target="30">0</span><span class="counter-lbl">Android Apps</span></div>
+    <div class="counter-item"><span class="counter-num" data-target="200">0</span><span class="counter-lbl">% Traffic Growth</span></div>
+    <div class="counter-item"><span class="counter-num" data-target="20">0</span><span class="counter-lbl">Stores Built</span></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs-wrap">
+    <button class="tab-btn active" data-tab="mobile">📱 Android</button>
+    <button class="tab-btn" data-tab="fullstack">🖥️ Full Stack</button>
+    <button class="tab-btn" data-tab="seo">📈 SEO</button>
+    <button class="tab-btn" data-tab="content">✍️ Content</button>
+    <button class="tab-btn" data-tab="shopify">🛍️ Shopify</button>
+    <button class="tab-btn" data-tab="wordpress">🌐 WordPress</button>
+    <button class="tab-btn" data-tab="crm">🤝 CRM</button>
+    <button class="tab-btn" data-tab="consulting">🧭 Consulting</button>
+  </div>
+
+  <div class="skills-main">
+
+    <!-- ========== ANDROID SECTION ========== -->
+    <div class="skill-section active" id="tab-mobile">
+      <div class="section-header">
+        <div class="s-left">
+          <div class="s-icon" style="background:rgba(127,196,199,0.1);border:1px solid rgba(127,196,199,0.2);">📱</div>
+          <div class="s-title"><h2>Android Development</h2><p>Kotlin · Jetpack Compose · Firebase · Clean Architecture · 30+ apps shipped</p></div>
+        </div>
+        <div class="s-stat"><div class="num">4.8★</div><div class="lbl">Avg Play Store Rating</div></div>
+      </div>
+      <div class="accordion-list">
+
+        <div class="acc-item">
+          <div class="acc-head">
+            <div class="acc-emoji">🤖</div>
+            <div class="acc-meta">
+              <div class="acc-name">Kotlin Development</div>
+              <div class="acc-tagline">Coroutines, Flow, sealed classes — modern Android's core language</div>
+            </div>
+            <div class="acc-right">
+              <span class="acc-pct">95%</span>
+              <div class="acc-mini-bar"><div class="acc-mini-fill" data-w="95"></div></div>
+              <div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div>
+            </div>
+          </div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list">
+              <div class="sub-item"><span class="sub-bullet"></span>Coroutines & structured concurrency</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Kotlin Flow for reactive streams</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Sealed classes & extension functions</div>
+              <div class="sub-item"><span class="sub-bullet"></span>DSL-style API design</div>
+            </div>
+            <div class="acc-detail">
+              <div class="detail-line">Primary language across all Android projects — expressive, safe and concise.</div>
+              <div class="detail-line">Deep coroutine usage for smooth async operations without callback hell.</div>
+              <div class="detail-line">Code future developers actually enjoy reading and extending.</div>
+            </div>
+            <div class="acc-tags"><span class="tag">Coroutines</span><span class="tag">Flow</span><span class="tag">Extensions</span><span class="tag">DSL</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head">
+            <div class="acc-emoji">🎨</div>
+            <div class="acc-meta">
+              <div class="acc-name">Jetpack Compose</div>
+              <div class="acc-tagline">Declarative UI · Material 3 · Custom animations · Navigation</div>
+            </div>
+            <div class="acc-right">
+              <span class="acc-pct">90%</span>
+              <div class="acc-mini-bar"><div class="acc-mini-fill" data-w="90"></div></div>
+              <div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div>
+            </div>
+          </div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list">
+              <div class="sub-item"><span class="sub-bullet"></span>Material 3 theming & components</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Custom animations & transitions</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Navigation Compose</div>
+              <div class="sub-item"><span class="sub-bullet"></span>State hoisting & recomposition tuning</div>
+            </div>
+            <div class="acc-detail">
+              <div class="detail-line">Smooth, native-feeling UIs built declaratively — no XML boilerplate.</div>
+              <div class="detail-line">Performance-optimised recomposition so screens feel instant on every device.</div>
+              <div class="detail-line">Interfaces clients see and users love — every screen, every tap.</div>
+            </div>
+            <div class="acc-tags"><span class="tag">Material 3</span><span class="tag">Navigation</span><span class="tag">LazyColumn</span><span class="tag">Canvas</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head">
+            <div class="acc-emoji">🔥</div>
+            <div class="acc-meta">
+              <div class="acc-name">Firebase Suite</div>
+              <div class="acc-tagline">Auth · Firestore · FCM · Crashlytics · Remote Config</div>
+            </div>
+            <div class="acc-right">
+              <span class="acc-pct">88%</span>
+              <div class="acc-mini-bar"><div class="acc-mini-fill" data-w="88"></div></div>
+              <div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div>
+            </div>
+          </div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list">
+              <div class="sub-item"><span class="sub-bullet"></span>Firebase Auth (Google, email, phone)</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Firestore real-time database</div>
+              <div class="sub-item"><span class="sub-bullet"></span>FCM push notifications</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Crashlytics & Performance monitoring</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Cloud Functions & Remote Config</div>
+            </div>
+            <div class="acc-detail">
+              <div class="detail-line">Full backend toolkit powering real-time apps used by thousands daily.</div>
+              <div class="detail-line">Crashlytics monitoring means issues get fixed before users notice them.</div>
+              <div class="detail-line">Remote Config for A/B testing features without a new Play Store release.</div>
+            </div>
+            <div class="acc-tags"><span class="tag">Firestore</span><span class="tag">Auth</span><span class="tag">FCM</span><span class="tag">Crashlytics</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head">
+            <div class="acc-emoji">🏗️</div>
+            <div class="acc-meta">
+              <div class="acc-name">Clean Architecture & MVVM</div>
+              <div class="acc-tagline">Hilt DI · Repository pattern · Room · UseCases</div>
+            </div>
+            <div class="acc-right">
+              <span class="acc-pct">85%</span>
+              <div class="acc-mini-bar"><div class="acc-mini-fill" data-w="85"></div></div>
+              <div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div>
+            </div>
+          </div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list">
+              <div class="sub-item"><span class="sub-bullet"></span>MVVM + Repository pattern</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Hilt dependency injection</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Room for local persistence</div>
+              <div class="sub-item"><span class="sub-bullet"></span>UseCase layer for business logic</div>
+            </div>
+            <div class="acc-detail">
+              <div class="detail-line">Clear UI / domain / data separation that scales as your app grows.</div>
+              <div class="detail-line">Hilt DI keeps modules decoupled and unit tests actually testable.</div>
+              <div class="detail-line">Built for teams — any developer can pick it up and move fast from day one.</div>
+            </div>
+            <div class="acc-tags"><span class="tag">MVVM</span><span class="tag">Hilt</span><span class="tag">Room</span><span class="tag">UseCases</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head">
+            <div class="acc-emoji">🚀</div>
+            <div class="acc-meta">
+              <div class="acc-name">Play Store & ASO</div>
+              <div class="acc-tagline">Publishing · App Store Optimisation · CI/CD · ProGuard</div>
+            </div>
+            <div class="acc-right">
+              <span class="acc-pct">82%</span>
+              <div class="acc-mini-bar"><div class="acc-mini-fill" data-w="82"></div></div>
+              <div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div>
+            </div>
+          </div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list">
+              <div class="sub-item"><span class="sub-bullet"></span>App signing & release tracks</div>
+              <div class="sub-item"><span class="sub-bullet"></span>ASO: title, description, keywords</div>
+              <div class="sub-item"><span class="sub-bullet"></span>Screenshot & store listing design</div>
+              <div class="sub-item"><span class="sub-bullet"></span>GitHub Actions CI/CD pipeline</div>
+            </div>
+            <div class="acc-detail">
+              <div class="detail-line">4.8+ average rating across 30+ published apps — earned, not asked for.</div>
+              <div class="detail-line">ASO that surfaces your app to the right users without paying for installs.</div>
+              <div class="detail-line">Automated CI/CD so releases are fast, consistent and stress-free.</div>
+            </div>
+            <div class="acc-tags"><span class="tag">ASO</span><span class="tag">CI/CD</span><span class="tag">ProGuard</span><span class="tag">Play Console</span></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== FULL STACK SECTION ========== -->
+    <div class="skill-section" id="tab-fullstack">
+      <div class="section-header">
+        <div class="s-left">
+          <div class="s-icon" style="background:rgba(100,149,237,0.1);border:1px solid rgba(100,149,237,0.2);">🖥️</div>
+          <div class="s-title"><h2>Full Stack Development</h2><p>Python · Django · React · Cloud · Databases · End-to-end web delivery</p></div>
+        </div>
+        <div class="s-stat"><div class="num">15+</div><div class="lbl">Web Projects</div></div>
+      </div>
+      <div class="accordion-list">
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🐍</div><div class="acc-meta"><div class="acc-name">Python / Django</div><div class="acc-tagline">REST APIs · Admin panels · Celery · ORM</div></div><div class="acc-right"><span class="acc-pct">88%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="88"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Django REST Framework APIs</div><div class="sub-item"><span class="sub-bullet"></span>Celery async task queues</div><div class="sub-item"><span class="sub-bullet"></span>Custom admin panels</div><div class="sub-item"><span class="sub-bullet"></span>JWT & session authentication</div></div>
+            <div class="acc-detail"><div class="detail-line">Backend APIs and admin panels — clean, fast and production-ready.</div><div class="detail-line">The stack powering this portfolio and a dozen client backends.</div><div class="detail-line">Celery for jobs that run in the background so users never wait.</div></div>
+            <div class="acc-tags"><span class="tag">Django REST</span><span class="tag">Celery</span><span class="tag">JWT</span><span class="tag">ORM</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">⚛️</div><div class="acc-meta"><div class="acc-name">JavaScript / React</div><div class="acc-tagline">SPAs · Hooks · Tailwind · Interactive dashboards</div></div><div class="acc-right"><span class="acc-pct">85%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="85"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>React hooks & context API</div><div class="sub-item"><span class="sub-bullet"></span>Tailwind CSS styling</div><div class="sub-item"><span class="sub-bullet"></span>Vite build tooling</div><div class="sub-item"><span class="sub-bullet"></span>Client dashboards & landing pages</div></div>
+            <div class="acc-detail"><div class="detail-line">Interactive SPAs with clean component structure and fast load times.</div><div class="detail-line">Custom CSS animations and micro-interactions that delight users.</div><div class="detail-line">Client-facing pages with measurable conversion improvements.</div></div>
+            <div class="acc-tags"><span class="tag">React</span><span class="tag">Vite</span><span class="tag">Tailwind</span><span class="tag">SASS</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">☁️</div><div class="acc-meta"><div class="acc-name">Cloud & DevOps</div><div class="acc-tagline">AWS · Docker · Nginx · GitHub Actions CI/CD</div></div><div class="acc-right"><span class="acc-pct">78%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="78"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>AWS EC2, S3 & RDS deployment</div><div class="sub-item"><span class="sub-bullet"></span>Docker containerisation</div><div class="sub-item"><span class="sub-bullet"></span>Nginx reverse proxy</div><div class="sub-item"><span class="sub-bullet"></span>GitHub Actions automated pipelines</div></div>
+            <div class="acc-detail"><div class="detail-line">Production deployments — not just staging demos that break under load.</div><div class="detail-line">Servers that stay up, deploy smoothly and don't wake you at 3 AM.</div><div class="detail-line">Docker containers making environments reproducible across every machine.</div></div>
+            <div class="acc-tags"><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">Linux</span></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== SEO SECTION ========== -->
+    <div class="skill-section" id="tab-seo">
+      <div class="section-header">
+        <div class="s-left">
+          <div class="s-icon" style="background:rgba(100,200,120,0.1);border:1px solid rgba(100,200,120,0.2);">📈</div>
+          <div class="s-title"><h2>SEO Specialist</h2><p>Technical audits · Keyword strategy · Link building · Rankings that last</p></div>
+        </div>
+        <div class="s-stat"><div class="num">200%</div><div class="lbl">Avg Traffic Growth</div></div>
+      </div>
+      <div class="accordion-list">
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🔍</div><div class="acc-meta"><div class="acc-name">Technical SEO</div><div class="acc-tagline">Site audits · CWV · Schema · Crawlability · Indexation</div></div><div class="acc-right"><span class="acc-pct">95%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="95"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Full crawl & indexation audits</div><div class="sub-item"><span class="sub-bullet"></span>Core Web Vitals optimisation</div><div class="sub-item"><span class="sub-bullet"></span>Structured data / schema markup</div><div class="sub-item"><span class="sub-bullet"></span>Canonical tags & robots.txt</div><div class="sub-item"><span class="sub-bullet"></span>XML sitemaps & hreflang</div></div>
+            <div class="acc-detail"><div class="detail-line">Fixing what others miss so Google can find, understand and rank your content.</div><div class="detail-line">CWV tuning — faster sites rank higher and keep visitors from bouncing.</div><div class="detail-line">Structured data that wins rich snippets and drives higher click-through rates.</div></div>
+            <div class="acc-tags"><span class="tag">Screaming Frog</span><span class="tag">GSC</span><span class="tag">CWV</span><span class="tag">Schema</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🗝️</div><div class="acc-meta"><div class="acc-name">Keyword Research & Strategy</div><div class="acc-tagline">Intent mapping · Competitor gaps · Long-tail clusters</div></div><div class="acc-right"><span class="acc-pct">92%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="92"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Search intent classification</div><div class="sub-item"><span class="sub-bullet"></span>Competitor keyword gap analysis</div><div class="sub-item"><span class="sub-bullet"></span>Long-tail cluster building</div><div class="sub-item"><span class="sub-bullet"></span>Seasonal & trend-based targeting</div></div>
+            <div class="acc-detail"><div class="detail-line">Targeting buyers not browsers — the difference between traffic and revenue.</div><div class="detail-line">Gap analysis to find what competitors rank for that you don't — yet.</div><div class="detail-line">Long-tail clusters that compound into major organic traffic over months.</div></div>
+            <div class="acc-tags"><span class="tag">Ahrefs</span><span class="tag">Semrush</span><span class="tag">GSC</span><span class="tag">KWFinder</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🔗</div><div class="acc-meta"><div class="acc-name">Link Building & Guest Posting</div><div class="acc-tagline">Outreach · Guest blogs · Placements · Digital PR</div></div><div class="acc-right"><span class="acc-pct">87%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="87"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Guest post outreach & placement</div><div class="sub-item"><span class="sub-bullet"></span>Niche blog partnerships</div><div class="sub-item"><span class="sub-bullet"></span>HARO & digital PR responses</div><div class="sub-item"><span class="sub-bullet"></span>Broken link reclamation</div><div class="sub-item"><span class="sub-bullet"></span>Resource page link building</div><div class="sub-item"><span class="sub-bullet"></span>Industry directory submissions</div></div>
+            <div class="acc-detail"><div class="detail-line">White-hat only — links that move the needle and survive algorithm updates.</div><div class="detail-line">Guest posting on real niche blogs with actual audiences — not PBNs.</div><div class="detail-line">Authority built the right way: patience, relationships and great content.</div></div>
+            <div class="acc-tags"><span class="tag">HARO</span><span class="tag">Outreach</span><span class="tag">Guest Posts</span><span class="tag">DR/DA</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">📊</div><div class="acc-meta"><div class="acc-name">Analytics & Reporting</div><div class="acc-tagline">GA4 · GSC · Looker Studio · Monthly reports</div></div><div class="acc-right"><span class="acc-pct">90%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="90"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>GA4 setup & event tracking</div><div class="sub-item"><span class="sub-bullet"></span>Search Console reporting</div><div class="sub-item"><span class="sub-bullet"></span>Looker Studio dashboards</div><div class="sub-item"><span class="sub-bullet"></span>Monthly performance reports</div></div>
+            <div class="acc-detail"><div class="detail-line">GA4 and GSC configured properly — not just installed and forgotten.</div><div class="detail-line">Monthly reports that answer what's working and why — not vanity dumps.</div><div class="detail-line">Data that drives your next decision, not just validates the last one.</div></div>
+            <div class="acc-tags"><span class="tag">GA4</span><span class="tag">GSC</span><span class="tag">Looker Studio</span><span class="tag">GTM</span></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== CONTENT WRITING SECTION ========== -->
+    <div class="skill-section" id="tab-content">
+      <div class="section-header">
+        <div class="s-left">
+          <div class="s-icon" style="background:rgba(255,180,100,0.1);border:1px solid rgba(255,180,100,0.2);">✍️</div>
+          <div class="s-title"><h2>Content Writing</h2><p>Blog posts · Product descriptions · Copywriting · Guest posting · SEO content</p></div>
+        </div>
+        <div class="s-stat"><div class="num">100+</div><div class="lbl">Pieces Written</div></div>
+      </div>
+      <div class="accordion-list">
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">📝</div><div class="acc-meta"><div class="acc-name">Blog Writing & SEO Articles</div><div class="acc-tagline">Long-form · Keyword-led · Rank-ready content</div></div><div class="acc-right"><span class="acc-pct">90%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="90"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Long-form SEO blog posts (1500–5000 words)</div><div class="sub-item"><span class="sub-bullet"></span>How-to guides & tutorials</div><div class="sub-item"><span class="sub-bullet"></span>Industry roundups & listicles</div><div class="sub-item"><span class="sub-bullet"></span>Topic cluster content strategy</div><div class="sub-item"><span class="sub-bullet"></span>Internal linking optimised structure</div></div>
+            <div class="acc-detail"><div class="detail-line">Content written to rank — structured around search intent, not just keywords.</div><div class="detail-line">Long-form guides that establish authority and earn backlinks naturally.</div><div class="detail-line">Every article built into a topic cluster that compounds your organic reach.</div></div>
+            <div class="acc-tags"><span class="tag">Long-form</span><span class="tag">SEO</span><span class="tag">Surfer SEO</span><span class="tag">Topic Clusters</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🛒</div><div class="acc-meta"><div class="acc-name">Product Descriptions</div><div class="acc-tagline">E-commerce copy · Conversion-focused · SEO-optimised</div></div><div class="acc-right"><span class="acc-pct">92%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="92"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Shopify & WooCommerce product copy</div><div class="sub-item"><span class="sub-bullet"></span>Feature-to-benefit translation</div><div class="sub-item"><span class="sub-bullet"></span>Keyword-rich without sounding robotic</div><div class="sub-item"><span class="sub-bullet"></span>Bulk product description writing</div><div class="sub-item"><span class="sub-bullet"></span>Category & collection page copy</div></div>
+            <div class="acc-detail"><div class="detail-line">Product copy that answers buyer questions before they think to ask them.</div><div class="detail-line">Benefits-first writing that moves people from browsing to buying.</div><div class="detail-line">SEO baked in — descriptions that rank in Google Shopping and organic search.</div></div>
+            <div class="acc-tags"><span class="tag">Ecommerce</span><span class="tag">Shopify</span><span class="tag">Conversion Copy</span><span class="tag">Bulk</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">📰</div><div class="acc-meta"><div class="acc-name">Guest Posting & Outreach Content</div><div class="acc-tagline">Niche blogs · Link-earning articles · Editorial placements</div></div><div class="acc-right"><span class="acc-pct">85%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="85"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Guest articles for authority blogs</div><div class="sub-item"><span class="sub-bullet"></span>Tech, business & marketing niches</div><div class="sub-item"><span class="sub-bullet"></span>Editor-ready, publication-standard writing</div><div class="sub-item"><span class="sub-bullet"></span>Byline strategy & author bio optimisation</div><div class="sub-item"><span class="sub-bullet"></span>Placement on DA40+ sites</div></div>
+            <div class="acc-detail"><div class="detail-line">Articles written to meet editorial standards — accepted on the first submission.</div><div class="detail-line">Natural contextual link placement that builds your domain authority steadily.</div><div class="detail-line">Each guest post doubles as brand exposure and a permanent backlink asset.</div></div>
+            <div class="acc-tags"><span class="tag">Guest Posts</span><span class="tag">DA40+</span><span class="tag">Outreach</span><span class="tag">Link Earning</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">💼</div><div class="acc-meta"><div class="acc-name">Web & Marketing Copywriting</div><div class="acc-tagline">Landing pages · Email sequences · Ad copy · Brand voice</div></div><div class="acc-right"><span class="acc-pct">83%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="83"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Landing page copy & CTAs</div><div class="sub-item"><span class="sub-bullet"></span>Email sequences & newsletters</div><div class="sub-item"><span class="sub-bullet"></span>Google & Meta ad copy</div><div class="sub-item"><span class="sub-bullet"></span>About pages & brand storytelling</div><div class="sub-item"><span class="sub-bullet"></span>Service & pricing page copy</div></div>
+            <div class="acc-detail"><div class="detail-line">Copy that connects — written in the brand voice, not a generic template.</div><div class="detail-line">Landing pages structured to guide visitors to one clear, confident action.</div><div class="detail-line">Email sequences that nurture, not annoy — open rates that prove the point.</div></div>
+            <div class="acc-tags"><span class="tag">Landing Pages</span><span class="tag">Email</span><span class="tag">Ad Copy</span><span class="tag">Brand Voice</span></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== SHOPIFY SECTION ========== -->
+    <div class="skill-section" id="tab-shopify">
+      <div class="section-header">
+        <div class="s-left">
+          <div class="s-icon" style="background:rgba(150,200,100,0.1);border:1px solid rgba(150,200,100,0.2);">🛍️</div>
+          <div class="s-title"><h2>Shopify Development</h2><p>Store setup · Custom themes · Apps · Speed · SEO · Support · Migrations</p></div>
+        </div>
+        <div class="s-stat"><div class="num">300%</div><div class="lbl">Avg Traffic Growth</div></div>
+      </div>
+      <div class="accordion-list">
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🏪</div><div class="acc-meta"><div class="acc-name">Shopify Store Startup & Setup</div><div class="acc-tagline">From zero to live — complete store build & configuration</div></div><div class="acc-right"><span class="acc-pct">94%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="94"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Domain setup & store configuration</div><div class="sub-item"><span class="sub-bullet"></span>Payment gateway integration</div><div class="sub-item"><span class="sub-bullet"></span>Shipping zones & tax rules</div><div class="sub-item"><span class="sub-bullet"></span>Product catalogue setup</div><div class="sub-item"><span class="sub-bullet"></span>Analytics & pixel installation</div></div>
+            <div class="acc-detail"><div class="detail-line">Complete store setup from a blank Shopify account to a live, selling store.</div><div class="detail-line">Every setting configured correctly from day one — no patching problems later.</div><div class="detail-line">Built to sell from launch day, not after months of tweaking.</div></div>
+            <div class="acc-tags"><span class="tag">Store Setup</span><span class="tag">Payments</span><span class="tag">Shipping</span><span class="tag">Launch</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🎨</div><div class="acc-meta"><div class="acc-name">Theme Development & Customisation</div><div class="acc-tagline">Liquid · Custom sections · Dawn · Conversion-focused design</div></div><div class="acc-right"><span class="acc-pct">92%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="92"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Liquid theme development from scratch</div><div class="sub-item"><span class="sub-bullet"></span>Section & block architecture</div><div class="sub-item"><span class="sub-bullet"></span>Dawn & premium theme customisation</div><div class="sub-item"><span class="sub-bullet"></span>Mobile-first responsive design</div></div>
+            <div class="acc-detail"><div class="detail-line">Custom themes that look unique, load fast and convert visitors into buyers.</div><div class="detail-line">Section-based architecture store owners can edit without breaking anything.</div><div class="detail-line">Never a cookie-cutter template — every store designed for its own audience.</div></div>
+            <div class="acc-tags"><span class="tag">Liquid</span><span class="tag">Dawn</span><span class="tag">Sections</span><span class="tag">Mobile-first</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🎧</div><div class="acc-meta"><div class="acc-name">Shopify Customer Support Setup</div><div class="acc-tagline">Help desk · Live chat · FAQ pages · Support workflows</div></div><div class="acc-right"><span class="acc-pct">85%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="85"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Gorgias / Tidio live chat integration</div><div class="sub-item"><span class="sub-bullet"></span>FAQ & help centre page setup</div><div class="sub-item"><span class="sub-bullet"></span>Order tracking & self-service flows</div><div class="sub-item"><span class="sub-bullet"></span>Return & refund policy pages</div><div class="sub-item"><span class="sub-bullet"></span>Automated reply workflows</div></div>
+            <div class="acc-detail"><div class="detail-line">Support infrastructure that handles common questions before they reach your inbox.</div><div class="detail-line">Live chat configured to convert hesitant buyers — not just answer complaints.</div><div class="detail-line">Customers who feel supported buy again. This setup makes that happen.</div></div>
+            <div class="acc-tags"><span class="tag">Gorgias</span><span class="tag">Tidio</span><span class="tag">FAQ</span><span class="tag">Automation</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">📦</div><div class="acc-meta"><div class="acc-name">Store Migrations & Product Imports</div><div class="acc-tagline">WooCommerce · Magento · BigCommerce · Bulk CSV imports</div></div><div class="acc-right"><span class="acc-pct">88%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="88"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>WooCommerce → Shopify migration</div><div class="sub-item"><span class="sub-bullet"></span>Magento & BigCommerce transfers</div><div class="sub-item"><span class="sub-bullet"></span>Bulk CSV product imports & mapping</div><div class="sub-item"><span class="sub-bullet"></span>301 redirect mapping for SEO</div><div class="sub-item"><span class="sub-bullet"></span>Customer & order data migration</div></div>
+            <div class="acc-detail"><div class="detail-line">Full migrations with zero data loss and zero downtime — done right the first time.</div><div class="detail-line">301 redirect maps protect existing SEO rankings through every transition.</div><div class="detail-line">A better store on the other side — not just the same store on a new platform.</div></div>
+            <div class="acc-tags"><span class="tag">Matrixify</span><span class="tag">CSV</span><span class="tag">301s</span><span class="tag">Data Migration</span></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== WORDPRESS SECTION ========== -->
+    <div class="skill-section" id="tab-wordpress">
+      <div class="section-header">
+        <div class="s-left">
+          <div class="s-icon" style="background:rgba(0,130,220,0.1);border:1px solid rgba(0,130,220,0.2);">🌐</div>
+          <div class="s-title"><h2>WordPress Development</h2><p>Setup · Custom themes · Plugins · WooCommerce · Speed & SEO</p></div>
+        </div>
+        <div class="s-stat"><div class="num">25+</div><div class="lbl">WP Sites Built</div></div>
+      </div>
+      <div class="accordion-list">
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🚀</div><div class="acc-meta"><div class="acc-name">WordPress Site Setup & Launch</div><div class="acc-tagline">Hosting · Domain · Theme · Plugins · Go-live</div></div><div class="acc-right"><span class="acc-pct">92%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="92"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Hosting setup (SiteGround, Kinsta, Cloudways)</div><div class="sub-item"><span class="sub-bullet"></span>SSL, domain & DNS configuration</div><div class="sub-item"><span class="sub-bullet"></span>Theme installation & customisation</div><div class="sub-item"><span class="sub-bullet"></span>Essential plugin stack configuration</div><div class="sub-item"><span class="sub-bullet"></span>Security hardening & backups</div></div>
+            <div class="acc-detail"><div class="detail-line">Full WordPress site from a blank server to a fast, secure, live website.</div><div class="detail-line">Right plugin stack chosen — no bloat that slows pages and breaks updates.</div><div class="detail-line">Security hardened from day one: firewalls, login protection and daily backups.</div></div>
+            <div class="acc-tags"><span class="tag">Elementor</span><span class="tag">Divi</span><span class="tag">Kinsta</span><span class="tag">SSL</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🛒</div><div class="acc-meta"><div class="acc-name">WooCommerce Stores</div><div class="acc-tagline">Product setup · Payments · Shipping · Extensions</div></div><div class="acc-right"><span class="acc-pct">85%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="85"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>WooCommerce store configuration</div><div class="sub-item"><span class="sub-bullet"></span>Stripe & PayPal integration</div><div class="sub-item"><span class="sub-bullet"></span>Shipping zones & product variations</div><div class="sub-item"><span class="sub-bullet"></span>Subscription & membership plugins</div></div>
+            <div class="acc-detail"><div class="detail-line">WooCommerce stores set up to sell — not just installed and left to figure out.</div><div class="detail-line">Payment and shipping configured so checkout is smooth and abandonment is low.</div><div class="detail-line">Extensions chosen carefully so they add value without adding load time.</div></div>
+            <div class="acc-tags"><span class="tag">WooCommerce</span><span class="tag">Stripe</span><span class="tag">PayPal</span><span class="tag">Subscriptions</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">⚡</div><div class="acc-meta"><div class="acc-name">WordPress Speed & SEO</div><div class="acc-tagline">Yoast · WP Rocket · Image optimisation · Core Web Vitals</div></div><div class="acc-right"><span class="acc-pct">88%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="88"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>WP Rocket / LiteSpeed caching</div><div class="sub-item"><span class="sub-bullet"></span>Image compression & WebP conversion</div><div class="sub-item"><span class="sub-bullet"></span>Yoast / RankMath SEO configuration</div><div class="sub-item"><span class="sub-bullet"></span>Core Web Vitals optimisation</div><div class="sub-item"><span class="sub-bullet"></span>Database cleanup & optimisation</div></div>
+            <div class="acc-detail"><div class="detail-line">WordPress sites that score 90+ on PageSpeed — without a full rebuild.</div><div class="detail-line">Yoast and RankMath configured beyond the defaults most people stop at.</div><div class="detail-line">Faster page loads mean better rankings, lower bounce rates and more sales.</div></div>
+            <div class="acc-tags"><span class="tag">WP Rocket</span><span class="tag">Yoast</span><span class="tag">WebP</span><span class="tag">CDN</span></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== CRM SECTION ========== -->
+    <div class="skill-section" id="tab-crm">
+      <div class="section-header">
+        <div class="s-left">
+          <div class="s-icon" style="background:rgba(255,140,80,0.1);border:1px solid rgba(255,140,80,0.2);">🤝</div>
+          <div class="s-title"><h2>CRM & Customer Support</h2><p>HubSpot · Zoho · Pipedrive · Help desks · Support workflows · Automation</p></div>
+        </div>
+        <div class="s-stat"><div class="num">10+</div><div class="lbl">CRM Setups</div></div>
+      </div>
+      <div class="accordion-list">
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">📋</div><div class="acc-meta"><div class="acc-name">CRM Setup & Configuration</div><div class="acc-tagline">HubSpot · Zoho · Pipedrive · Custom pipelines & automation</div></div><div class="acc-right"><span class="acc-pct">83%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="83"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>HubSpot CRM setup & pipeline config</div><div class="sub-item"><span class="sub-bullet"></span>Zoho CRM customisation & workflows</div><div class="sub-item"><span class="sub-bullet"></span>Pipedrive deal stage configuration</div><div class="sub-item"><span class="sub-bullet"></span>Contact & company data import</div><div class="sub-item"><span class="sub-bullet"></span>Automated follow-up sequences</div></div>
+            <div class="acc-detail"><div class="detail-line">CRM built around your actual sales process — not the default demo pipeline.</div><div class="detail-line">Automated follow-ups so no lead falls through the cracks while you're busy.</div><div class="detail-line">Pipelines your sales team actually use because they were designed with them.</div></div>
+            <div class="acc-tags"><span class="tag">HubSpot</span><span class="tag">Zoho</span><span class="tag">Pipedrive</span><span class="tag">Automation</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🎧</div><div class="acc-meta"><div class="acc-name">Customer Support Systems</div><div class="acc-tagline">Help desk setup · Ticketing · Live chat · Self-service portals</div></div><div class="acc-right"><span class="acc-pct">80%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="80"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Freshdesk / Zendesk ticketing setup</div><div class="sub-item"><span class="sub-bullet"></span>Live chat widget integration</div><div class="sub-item"><span class="sub-bullet"></span>Knowledge base & FAQ portals</div><div class="sub-item"><span class="sub-bullet"></span>SLA rules & escalation workflows</div><div class="sub-item"><span class="sub-bullet"></span>Agent onboarding documentation</div></div>
+            <div class="acc-detail"><div class="detail-line">Support systems that resolve issues fast — before customers leave a bad review.</div><div class="detail-line">Self-service portals that handle 40–60% of common questions without staff time.</div><div class="detail-line">Happy customers are your best marketing. This infrastructure creates them.</div></div>
+            <div class="acc-tags"><span class="tag">Freshdesk</span><span class="tag">Zendesk</span><span class="tag">Live Chat</span><span class="tag">KB</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">⚙️</div><div class="acc-meta"><div class="acc-name">CRM Automation & Integration</div><div class="acc-tagline">Zapier · API connections · Email sequences · Lead scoring</div></div><div class="acc-right"><span class="acc-pct">78%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="78"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Zapier / Make (Integromat) automations</div><div class="sub-item"><span class="sub-bullet"></span>Website form → CRM lead capture</div><div class="sub-item"><span class="sub-bullet"></span>Email sequence automation</div><div class="sub-item"><span class="sub-bullet"></span>Lead scoring & qualification rules</div></div>
+            <div class="acc-detail"><div class="detail-line">CRM connected to your website, email and tools — one source of truth.</div><div class="detail-line">Leads captured, scored and routed automatically — zero manual data entry.</div><div class="detail-line">Automation that works while you sleep so no opportunity is ever missed.</div></div>
+            <div class="acc-tags"><span class="tag">Zapier</span><span class="tag">Make</span><span class="tag">Lead Scoring</span><span class="tag">Email Seq</span></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========== CONSULTING SECTION ========== -->
+    <div class="skill-section" id="tab-consulting">
+      <div class="section-header">
+        <div class="s-left">
+          <div class="s-icon" style="background:rgba(180,150,220,0.1);border:1px solid rgba(180,150,220,0.2);">🧭</div>
+          <div class="s-title"><h2>Digital Consulting</h2><p>Strategy · Tech architecture · Roadmapping · Growth planning · 20+ startups</p></div>
+        </div>
+        <div class="s-stat"><div class="num">20+</div><div class="lbl">Startups Advised</div></div>
+      </div>
+      <div class="accordion-list">
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🏛️</div><div class="acc-meta"><div class="acc-name">Tech Stack Selection</div><div class="acc-tagline">Architecture · Build vs buy · Scalability planning</div></div><div class="acc-right"><span class="acc-pct">92%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="92"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Technology evaluation & comparison</div><div class="sub-item"><span class="sub-bullet"></span>Build vs buy vs integrate analysis</div><div class="sub-item"><span class="sub-bullet"></span>Long-term maintenance cost modelling</div><div class="sub-item"><span class="sub-bullet"></span>Team skill vs stack alignment</div></div>
+            <div class="acc-detail"><div class="detail-line">Cutting through hype to recommend tech that fits your team, budget and timeline.</div><div class="detail-line">Right stack chosen once saves months of painful and expensive migration later.</div><div class="detail-line">Decisions grounded in your specific context — not generic blog post advice.</div></div>
+            <div class="acc-tags"><span class="tag">Architecture</span><span class="tag">Scalability</span><span class="tag">Build vs Buy</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">🗺️</div><div class="acc-meta"><div class="acc-name">Product Roadmapping</div><div class="acc-tagline">MVP scoping · Feature prioritisation · Sprint planning</div></div><div class="acc-right"><span class="acc-pct">88%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="88"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>MVP definition & scope trimming</div><div class="sub-item"><span class="sub-bullet"></span>Effort vs impact prioritisation</div><div class="sub-item"><span class="sub-bullet"></span>Sprint planning & milestone setting</div><div class="sub-item"><span class="sub-bullet"></span>Investor-ready roadmap documentation</div></div>
+            <div class="acc-detail"><div class="detail-line">MVPs that ship in weeks not quarters — without cutting the wrong corners.</div><div class="detail-line">Prioritisation frameworks that remove opinion and gut-feeling from decisions.</div><div class="detail-line">Roadmaps investors understand and developers can actually execute against.</div></div>
+            <div class="acc-tags"><span class="tag">MVP</span><span class="tag">Agile</span><span class="tag">Sprints</span><span class="tag">OKRs</span></div>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head"><div class="acc-emoji">📉</div><div class="acc-meta"><div class="acc-name">Digital Transformation</div><div class="acc-tagline">Legacy systems · Workflow automation · Process modernisation</div></div><div class="acc-right"><span class="acc-pct">85%</span><div class="acc-mini-bar"><div class="acc-mini-fill" data-w="85"></div></div><div class="acc-chevron"><i class="fas fa-chevron-down" style="font-size:0.75rem"></i></div></div></div>
+          <div class="acc-body"><div class="acc-inner">
+            <div class="acc-sub-list"><div class="sub-item"><span class="sub-bullet"></span>Legacy system migration planning</div><div class="sub-item"><span class="sub-bullet"></span>Manual process automation</div><div class="sub-item"><span class="sub-bullet"></span>Tool audit & consolidation</div><div class="sub-item"><span class="sub-bullet"></span>Change management support</div></div>
+            <div class="acc-detail"><div class="detail-line">Moving businesses from manual chaos to automated, scalable modern workflows.</div><div class="detail-line">Tool audits that cut your SaaS bill while improving what your team can actually do.</div><div class="detail-line">Businesses that transform properly save more than they spend — and move faster.</div></div>
+            <div class="acc-tags"><span class="tag">Automation</span><span class="tag">Migration</span><span class="tag">Tool Audit</span><span class="tag">Change Mgmt</span></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /skills-main -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+    // ── Accordion toggle ──
+    document.querySelectorAll('.acc-head').forEach(head => {
+      head.addEventListener('click', () => {
+        const item = head.closest('.acc-item');
+        const wasOpen = item.classList.contains('open');
+        // close all in same list
+        item.closest('.accordion-list').querySelectorAll('.acc-item').forEach(i => {
+          i.classList.remove('open');
+        });
+        if (!wasOpen) {
+          item.classList.add('open');
+          // animate bars inside
+          item.querySelectorAll('.acc-mini-fill').forEach(fill => {
+            fill.style.width = '0';
+            setTimeout(() => fill.style.width = fill.dataset.w + '%', 60);
+          });
+        }
+      });
+    });
+
+    // ── Tabs ──
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.skill-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        const sec = document.getElementById('tab-' + btn.dataset.tab);
+        sec.classList.add('active');
+        // reset open accordions
+        sec.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+        // stagger reveal
+        revealItems(sec);
+      });
+    });
+
+    // ── Stagger reveal on section show ──
+    function revealItems(container) {
+      const items = container.querySelectorAll('.acc-item');
+      items.forEach((item, i) => {
+        item.classList.remove('revealed');
+        item.style.transitionDelay = '0s';
+      });
+      requestAnimationFrame(() => {
+        items.forEach((item, i) => {
+          setTimeout(() => {
+            item.style.transitionDelay = i * 0.07 + 's';
+            item.classList.add('revealed');
+          }, 30);
+        });
+      });
+    }
+    // Reveal initial tab
+    revealItems(document.querySelector('.skill-section.active'));
+
+    // ── Animated counters ──
+    function animateCounter(el, target, duration) {
+      let start = null;
+      const step = ts => {
+        if (!start) start = ts;
+        const progress = Math.min((ts - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(step);
+    }
+    const counterEls = document.querySelectorAll('.counter-num');
+    let countersRan = false;
+    const io = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !countersRan) {
+        countersRan = true;
+        counterEls.forEach(el => animateCounter(el, +el.dataset.target, 1800));
+      }
+    }, { threshold: 0.4 });
+    if (counterEls.length) io.observe(counterEls[0].closest('.counters-row'));
+
+    // ── Theme toggle ──
+    (function () {
+      const body = document.body, btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      if (localStorage.getItem('theme') === 'dark') body.classList.add('dark-mode');
+      const upd = () => { const ic = btn.querySelector('.material-symbols-outlined'); if (ic) ic.textContent = body.classList.contains('dark-mode') ? 'light_mode' : 'dark_mode'; };
+      btn.addEventListener('click', () => { body.classList.toggle('dark-mode'); localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light'); upd(); });
+      upd();
+    })();
+
+  </script>
+</body>
+</html>

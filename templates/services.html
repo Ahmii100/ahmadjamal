@@ -1,0 +1,2129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ahmad Jamal · Services</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Select2 for country dropdown -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --accent: #5f9ea0;
+      --accent-dark: #4a7d7f;
+      --accent-light: #7fc4c7;
+      --bg-light: #f8fafd;
+      --gradient: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      overflow-x: hidden;
+    }
+    
+    body.dark-mode {
+      background-color: #0f1724;
+      color: #eef3fd;
+    }
+    
+    body.dark-mode .card,
+    body.dark-mode .service-card,
+    body.dark-mode .quote-sidebar {
+      background-color: #1a283c;
+      border-color: #2d4663;
+      color: #eef3fd;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar-custom {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255,255,255,0.9);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s;
+    }
+    
+    body.dark-mode .navbar-custom {
+      background-color: rgba(10,20,30,0.9);
+    }
+
+    .navbar-custom.scrolled {
+      padding: 0.3rem 0;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    }
+    
+    .nav-btn {
+      color: #2b4058;
+      text-decoration: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      transition: all 0.3s;
+      position: relative;
+      font-weight: 500;
+    }
+    
+    body.dark-mode .nav-btn {
+      color: #d0e2ff;
+    }
+    
+    .nav-btn:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    .nav-btn.active {
+      background: var(--gradient);
+      color: white !important;
+      box-shadow: 0 5px 15px rgba(95,158,160,0.3);
+    }
+    
+    .logo-block {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(145deg,#1f3a52,#2b5075);
+      border-radius: 30% 70% 70% 30%/30% 50% 50% 70%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      transition: all 0.3s;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .brand-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1f3a52;
+      transition: color 0.3s;
+    }
+    
+    body.dark-mode .brand-text {
+      color: #d0e2ff;
+    }
+
+    #theme-toggle {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    
+    #theme-toggle:hover {
+      background: rgba(130,170,210,0.15);
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+      padding: 4rem 0 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(95,158,160,0.1);
+      border: 1px solid rgba(95,158,160,0.2);
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      animation: pulse 2s infinite;
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-title span::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: rgba(95,158,160,0.2);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: #6f8faf;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    body.dark-mode .hero-desc {
+      color: #adc4e2;
+    }
+
+    /* ===== CATEGORY TABS ===== */
+    .cat-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 2rem 1rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .cat-tab {
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid rgba(143,177,208,0.3);
+      background: transparent;
+      color: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cat-tab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      transition: left 0.3s;
+      z-index: -1;
+    }
+
+    .cat-tab:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .cat-tab.active {
+      background: var(--gradient);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 5px 15px rgba(95,158,160,0.3);
+    }
+
+    .cat-tab.active::before {
+      left: 0;
+    }
+
+    /* ===== SERVICE CARDS ===== */
+    .service-card {
+      border: 1px solid rgba(143,177,208,0.2);
+      border-radius: 24px;
+      padding: 1.8rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background-color: white;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background: var(--gradient);
+      transition: height 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px -12px rgba(95,158,160,0.3);
+      border-color: var(--accent);
+    }
+
+    .service-card:hover::before {
+      height: 100%;
+    }
+
+    .service-card.selected {
+      border-color: var(--accent);
+      border-width: 2px;
+      background: linear-gradient(to bottom right, white, rgba(95,158,160,0.05));
+    }
+
+    body.dark-mode .service-card.selected {
+      background: linear-gradient(to bottom right, #1a283c, rgba(95,158,160,0.1));
+    }
+
+    .service-check {
+      display: none;
+      width: 28px;
+      height: 28px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      animation: pulse 0.3s ease;
+    }
+
+    .service-card.selected .service-check {
+      display: flex;
+    }
+
+    .service-badge {
+      background: #e3eefa;
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    body.dark-mode .service-badge {
+      background: #253f5c;
+    }
+
+    .service-badge.popular {
+      background: var(--accent);
+      color: white;
+    }
+
+    .service-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .price-tag {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+
+    .price-tag small {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #6f8faf;
+    }
+
+    .service-desc {
+      font-size: 0.85rem;
+      color: #6f8faf;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    body.dark-mode .service-desc {
+      color: #adc4e2;
+    }
+
+    .add-btn {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.6rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .add-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .add-btn:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(95,158,160,0.3);
+    }
+
+    .add-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .service-card.selected .add-btn {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* ===== QUOTE SIDEBAR ===== */
+    .quote-sidebar {
+      position: sticky;
+      top: 90px;
+      background: white;
+      border-radius: 28px;
+      border: 1px solid rgba(143,177,208,0.2);
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      animation: slideIn 0.6s ease;
+    }
+
+    .quote-sidebar:hover {
+      box-shadow: 0 25px 50px -15px var(--accent);
+    }
+
+    .quote-header {
+      background: var(--gradient);
+      color: white;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .quote-count {
+      background: rgba(255,255,255,0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .quote-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(143,177,208,0.2);
+      transition: all 0.3s;
+      animation: slideIn 0.3s ease;
+    }
+
+    .quote-item:hover {
+      background: rgba(95,158,160,0.05);
+      transform: translateX(5px);
+    }
+
+    .quote-item-name {
+      font-weight: 600;
+    }
+
+    .quote-item-price {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .quote-item-remove {
+      color: #999;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: all 0.3s;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .quote-item-remove:hover {
+      color: #e74c3c;
+      background: rgba(231,76,60,0.1);
+      transform: rotate(90deg);
+    }
+
+    .btn-accent {
+      background: var(--gradient);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-accent::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn-accent:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(95,158,160,0.4);
+    }
+
+    .btn-accent:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-accent:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 70%;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    /* ===== CONTACT FORM ===== */
+    .contact-form {
+      background: #2b3a4f;
+      border-radius: 0 0 20px 20px;
+      padding: 1.5rem;
+    }
+    
+    body.dark-mode .contact-form {
+      background: #1e2a37;
+    }
+    
+    .form-label {
+      font-weight: 600;
+      color: #5f9ea0;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .form-control {
+      background: #1e2a37;
+      border: 1px solid #3a4a5f;
+      color: white;
+      border-radius: 10px;
+      padding: 0.7rem 1rem;
+      width: 100%;
+    }
+    
+    .form-control:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(95,158,160,0.2);
+      outline: none;
+    }
+    
+    .form-control::placeholder {
+      color: #8a9bb0;
+    }
+    
+    /* Phone input group - FIXED */
+    .phone-input-group {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+    
+    .country-select-wrapper {
+      width: 120px;
+      flex-shrink: 0;
+    }
+    
+    .country-select {
+      width: 100%;
+      height: 42px;
+      background: #1e2a37;
+      border: 1px solid #3a4a5f;
+      color: white;
+      border-radius: 10px;
+      padding: 0 0.5rem;
+    }
+    
+    .phone-number-input {
+      flex: 1;
+    }
+    
+    /* Select2 customization */
+    .select2-container--default .select2-selection--single {
+      background-color: #1e2a37;
+      border: 1px solid #3a4a5f;
+      border-radius: 10px;
+      height: 42px;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      color: white;
+      line-height: 42px;
+      padding-left: 12px;
+    }
+    
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+      height: 40px;
+    }
+    
+    .select2-dropdown {
+      background-color: #1e2a37;
+      border: 1px solid #3a4a5f;
+    }
+    
+    .select2-results__option {
+      color: white;
+      padding: 8px 12px;
+    }
+    
+    .select2-results__option--highlighted {
+      background-color: var(--accent) !important;
+    }
+    
+    .select2-search__field {
+      background-color: #2b3a4f !important;
+      color: white !important;
+      border: 1px solid #3a4a5f !important;
+      border-radius: 5px !important;
+    }
+    
+    /* Validation styles */
+    .is-invalid {
+      border-color: #dc3545 !important;
+    }
+    
+    .invalid-feedback {
+      color: #dc3545;
+      font-size: 0.8rem;
+      margin-top: 4px;
+      display: none;
+    }
+    
+    .invalid-feedback.show {
+      display: block;
+    }
+    
+    .btn-whatsapp {
+      background: #25d366;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-whatsapp:hover {
+      background: #128C7E;
+      color: white;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      .quote-sidebar {
+        position: static;
+        margin-top: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .service-card {
+        padding: 1.2rem;
+      }
+      
+      .price-tag {
+        font-size: 1.6rem;
+      }
+      
+      .phone-input-group {
+        flex-direction: column;
+      }
+      
+      .country-select-wrapper {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-custom py-3" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3" href="/">
+      <div class="logo-block">AJ</div>
+      <span class="fw-bold brand-text">Ahmad Jamal</span>
+    </a>
+    
+    <div class="collapse navbar-collapse justify-content-center">
+      <div class="d-flex gap-2">
+        <a href="/" class="nav-btn">Home</a>
+        <a href="/projects/" class="nav-btn">Projects</a>
+        <a href="/skills/" class="nav-btn">Skills</a>
+        <a href="/services/" class="nav-btn active">Services</a>
+        <a href="/about/" class="nav-btn">About</a>
+        <a href="/contact/" class="nav-btn">Contact</a>
+      </div>
+    </div>
+    
+    <button id="theme-toggle" class="btn">
+      <span class="material-symbols-outlined">dark_mode</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="dot"></span> 100+ Services · Custom Quotes
+    </div>
+    <h1 class="hero-title">Choose Your <span>Services</span></h1>
+    <p class="hero-desc">Mix and match packages or individual tasks — get an instant quote</p>
+  </div>
+</section>
+
+<!-- CATEGORY TABS -->
+<div class="container">
+  <div class="cat-tabs" data-aos="fade-up">
+    <button class="cat-tab active" data-cat="web">💻 Web Development</button>
+    <button class="cat-tab" data-cat="wordpress">🌐 WordPress</button>
+    <button class="cat-tab" data-cat="seo">📈 SEO</button>
+    <button class="cat-tab" data-cat="content">✍️ Content</button>
+    <button class="cat-tab" data-cat="shopify">🛍️ Shopify</button>
+    <button class="cat-tab" data-cat="android">📱 Android</button>
+    <button class="cat-tab" data-cat="consulting">🧭 Consulting</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+  <div class="row g-4">
+    <!-- Left Column - Services -->
+    <div class="col-lg-8">
+      
+      <!-- ===== WEB DEVELOPMENT CATEGORY ===== -->
+      <div class="service-cat active" id="cat-web">
+        <!-- Complete Packages -->
+        <h3 class="section-title" data-aos="fade-right">📦 Complete Website Packages</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="web-basic" data-name="Basic Website Package" data-cat="Web Package" data-price="400">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="service-badge">Starter</span>
+                <span class="service-check"><i class="fas fa-check"></i></span>
+              </div>
+              <h5 class="service-title">Basic Website</h5>
+              <div class="price-tag">$400</div>
+              <p class="service-desc">5 pages, responsive design, contact form, basic SEO</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="web-pro" data-name="Business Website Package" data-cat="Web Package" data-price="900">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="service-badge popular">Popular</span>
+                <span class="service-check"><i class="fas fa-check"></i></span>
+              </div>
+              <h5 class="service-title">Business Pro</h5>
+              <div class="price-tag">$900</div>
+              <p class="service-desc">10 pages, blog CMS, custom animations, advanced SEO</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="web-ecom" data-name="E-commerce Package" data-cat="Web Package" data-price="1800">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="service-badge">E-commerce</span>
+                <span class="service-check"><i class="fas fa-check"></i></span>
+              </div>
+              <h5 class="service-title">E-commerce Store</h5>
+              <div class="price-tag">$1,800</div>
+              <p class="service-desc">Unlimited products, payments, inventory management</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Web Micro Tasks -->
+        <h3 class="section-title" data-aos="fade-right">🔧 Web Development Tasks</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="web-logo" data-name="Logo Removal/Replacement" data-cat="Web Task" data-price="50">
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Logo Removal/Replacement</h5>
+              <div class="price-tag">$50</div>
+              <p class="service-desc">Remove existing logo, upload and position new logo</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="service-card" data-id="web-colors" data-name="Color Scheme Change" data-cat="Web Task" data-price="75">
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Color Scheme Change</h5>
+              <div class="price-tag">$75</div>
+              <p class="service-desc">Update website colors to match your brand</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="web-mobile" data-name="Mobile Layout Fix" data-cat="Web Task" data-price="120">
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Mobile Layout Fix</h5>
+              <div class="price-tag">$120</div>
+              <p class="service-desc">Fix responsive issues on mobile devices</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-card" data-id="web-speed" data-name="Speed Optimization" data-cat="Web Task" data-price="150">
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Speed Optimization</h5>
+              <div class="price-tag">$150</div>
+              <p class="service-desc">Improve page speed and Core Web Vitals</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="web-plugin" data-name="Plugin Installation" data-cat="Web Task" data-price="60">
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Plugin Installation</h5>
+              <div class="price-tag">$60</div>
+              <p class="service-desc">Install and configure plugins</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="service-card" data-id="web-page" data-name="Add New Page" data-cat="Web Task" data-price="200">
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Add New Page</h5>
+              <div class="price-tag">$200</div>
+              <p class="service-desc">Create and design new page</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-card" data-id="web-forms" data-name="Custom Form" data-cat="Web Task" data-price="80">
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Custom Form</h5>
+              <div class="price-tag">$80</div>
+              <p class="service-desc">Create and integrate custom forms</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="350">
+            <div class="service-card" data-id="web-security" data-name="Security Hardening" data-cat="Web Task" data-price="180">
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Security Hardening</h5>
+              <div class="price-tag">$180</div>
+              <p class="service-desc">Website security audit and fixes</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== WORDPRESS CATEGORY ===== -->
+      <div class="service-cat" id="cat-wordpress">
+        <!-- WordPress Packages -->
+        <h3 class="section-title" data-aos="fade-right">📦 WordPress Packages</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="wp-basic" data-name="WordPress Basic Setup" data-cat="WordPress" data-price="350">
+              <span class="service-badge">Starter</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">WordPress Setup</h5>
+              <div class="price-tag">$350</div>
+              <p class="service-desc">Theme setup, 5 pages, essential plugins</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="wp-custom" data-name="Custom WordPress Theme" data-cat="WordPress" data-price="800">
+              <span class="service-badge popular">Popular</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Custom WordPress Theme</h5>
+              <div class="price-tag">$800</div>
+              <p class="service-desc">Custom theme, ACF, custom post types</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="wp-woo" data-name="WooCommerce Store" data-cat="WordPress" data-price="1200">
+              <span class="service-badge">E-commerce</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">WooCommerce Store</h5>
+              <div class="price-tag">$1,200</div>
+              <p class="service-desc">Full e-commerce setup with products</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- WordPress Tasks -->
+        <h3 class="section-title" data-aos="fade-right">🔧 WordPress Tasks</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="wp-plugin" data-name="Install WordPress Plugin" data-cat="WordPress" data-price="50">
+              <h5 class="service-title">Install/Configure Plugin</h5>
+              <div class="price-tag">$50</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="service-card" data-id="wp-update" data-name="WordPress Update" data-cat="WordPress" data-price="40">
+              <h5 class="service-title">Update WordPress Core</h5>
+              <div class="price-tag">$40</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="wp-speed" data-name="WordPress Speed Fix" data-cat="WordPress" data-price="130">
+              <h5 class="service-title">Speed Optimization</h5>
+              <div class="price-tag">$130</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-card" data-id="wp-malware" data-name="Malware Removal" data-cat="WordPress" data-price="200">
+              <h5 class="service-title">Malware Removal</h5>
+              <div class="price-tag">$200</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="wp-backup" data-name="Backup Setup" data-cat="WordPress" data-price="60">
+              <h5 class="service-title">Backup Setup</h5>
+              <div class="price-tag">$60</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="service-card" data-id="wp-ssl" data-name="SSL Fix" data-cat="WordPress" data-price="70">
+              <h5 class="service-title">SSL/HTTPS Fix</h5>
+              <div class="price-tag">$70</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SEO CATEGORY ===== -->
+      <div class="service-cat" id="cat-seo">
+        <!-- SEO Packages -->
+        <h3 class="section-title" data-aos="fade-right">📦 SEO Packages</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="seo-basic" data-name="SEO Starter" data-cat="SEO" data-price="200">
+              <span class="service-badge">Starter</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">SEO Starter</h5>
+              <div class="price-tag">$200<small>/mo</small></div>
+              <p class="service-desc">Technical audit, 10 keywords, monthly report</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="seo-pro" data-name="SEO Professional" data-cat="SEO" data-price="450">
+              <span class="service-badge popular">Popular</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">SEO Professional</h5>
+              <div class="price-tag">$450<small>/mo</small></div>
+              <p class="service-desc">30 keywords, 4 articles, 5 backlinks</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="seo-enterprise" data-name="SEO Enterprise" data-cat="SEO" data-price="900">
+              <span class="service-badge">Enterprise</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">SEO Enterprise</h5>
+              <div class="price-tag">$900<small>/mo</small></div>
+              <p class="service-desc">100 keywords, 8 articles, 15 backlinks</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEO Tasks -->
+        <h3 class="section-title" data-aos="fade-right">🔍 SEO Tasks</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="seo-audit" data-name="Full SEO Audit" data-cat="SEO" data-price="150">
+              <h5 class="service-title">Full SEO Audit</h5>
+              <div class="price-tag">$150</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="service-card" data-id="seo-keywords" data-name="Keyword Research" data-cat="SEO" data-price="100">
+              <h5 class="service-title">Keyword Research</h5>
+              <div class="price-tag">$100</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="seo-schema" data-name="Schema Markup" data-cat="SEO" data-price="90">
+              <h5 class="service-title">Schema Markup</h5>
+              <div class="price-tag">$90</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-card" data-id="seo-backlinks" data-name="Backlink Analysis" data-cat="SEO" data-price="200">
+              <h5 class="service-title">Backlink Analysis</h5>
+              <div class="price-tag">$200</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="seo-local" data-name="Local SEO" data-cat="SEO" data-price="180">
+              <h5 class="service-title">Local SEO Setup</h5>
+              <div class="price-tag">$180</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="service-card" data-id="seo-content" data-name="Content Optimization" data-cat="SEO" data-price="120">
+              <h5 class="service-title">Content Optimization</h5>
+              <div class="price-tag">$120</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CONTENT CATEGORY ===== -->
+      <div class="service-cat" id="cat-content">
+        <!-- Content Packages -->
+        <h3 class="section-title" data-aos="fade-right">📦 Content Packages</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="content-basic" data-name="4 SEO Articles" data-cat="Content" data-price="150">
+              <span class="service-badge">Starter</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">4 SEO Articles</h5>
+              <div class="price-tag">$150<small>/mo</small></div>
+              <p class="service-desc">1500 words each, SEO optimized</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="content-pro" data-name="8 SEO Articles" data-cat="Content" data-price="320">
+              <span class="service-badge popular">Popular</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">8 SEO Articles</h5>
+              <div class="price-tag">$320<small>/mo</small></div>
+              <p class="service-desc">2000 words each, keyword research</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="content-premium" data-name="12 Premium Articles" data-cat="Content" data-price="500">
+              <span class="service-badge">Premium</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">12 Premium Articles</h5>
+              <div class="price-tag">$500<small>/mo</small></div>
+              <p class="service-desc">2500 words, in-depth research</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guest Posts -->
+        <h3 class="section-title" data-aos="fade-right">📰 Guest Post Packages</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="guest-d40" data-name="Guest Post DA40+" data-cat="Guest Post" data-price="120">
+              <span class="service-badge">DA 40-50</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Guest Post (DA 40-50)</h5>
+              <div class="price-tag">$120</div>
+              <p class="service-desc">Article + dofollow backlink</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="guest-d60" data-name="Guest Post DA60+" data-cat="Guest Post" data-price="220">
+              <span class="service-badge popular">DA 60-70</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Guest Post (DA 60-70)</h5>
+              <div class="price-tag">$220</div>
+              <p class="service-desc">Premium site + dofollow backlink</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="guest-d80" data-name="Guest Post DA80+" data-cat="Guest Post" data-price="350">
+              <span class="service-badge">DA 80+</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Guest Post (DA 80+)</h5>
+              <div class="price-tag">$350</div>
+              <p class="service-desc">High authority + dofollow backlink</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Tasks -->
+        <h3 class="section-title" data-aos="fade-right">✍️ Content Tasks</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="content-blog" data-name="500-word Blog Post" data-cat="Content" data-price="45">
+              <h5 class="service-title">500-word Blog Post</h5>
+              <div class="price-tag">$45</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="service-card" data-id="content-blog-long" data-name="1000-word Blog Post" data-cat="Content" data-price="80">
+              <h5 class="service-title">1000-word Blog Post</h5>
+              <div class="price-tag">$80</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="content-product" data-name="Product Description" data-cat="Content" data-price="15">
+              <h5 class="service-title">Product Description</h5>
+              <div class="price-tag">$15</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-card" data-id="content-landing" data-name="Landing Page Copy" data-cat="Content" data-price="120">
+              <h5 class="service-title">Landing Page Copy</h5>
+              <div class="price-tag">$120</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="content-email" data-name="Email Newsletter" data-cat="Content" data-price="50">
+              <h5 class="service-title">Email Newsletter</h5>
+              <div class="price-tag">$50</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="service-card" data-id="content-press" data-name="Press Release" data-cat="Content" data-price="100">
+              <h5 class="service-title">Press Release</h5>
+              <div class="price-tag">$100</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SHOPIFY CATEGORY ===== -->
+      <div class="service-cat" id="cat-shopify">
+        <!-- Shopify Packages -->
+        <h3 class="section-title" data-aos="fade-right">📦 Shopify Packages</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="shopify-basic" data-name="Shopify Basic Setup" data-cat="Shopify" data-price="300">
+              <span class="service-badge">Starter</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Shopify Basic Setup</h5>
+              <div class="price-tag">$300</div>
+              <p class="service-desc">Theme setup, 30 products, payments</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="shopify-custom" data-name="Custom Shopify Store" data-cat="Shopify" data-price="700">
+              <span class="service-badge popular">Popular</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Custom Shopify Store</h5>
+              <div class="price-tag">$700</div>
+              <p class="service-desc">Custom theme, unlimited products, apps</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="shopify-premium" data-name="Shopify Premium" data-cat="Shopify" data-price="1500">
+              <span class="service-badge">Premium</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Shopify Premium</h5>
+              <div class="price-tag">$1,500</div>
+              <p class="service-desc">Full custom store + marketing setup</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shopify Tasks -->
+        <h3 class="section-title" data-aos="fade-right">🛠️ Shopify Tasks</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="shopify-logo" data-name="Upload/Change Logo" data-cat="Shopify" data-price="50">
+              <h5 class="service-title">Upload/Change Logo</h5>
+              <div class="price-tag">$50</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="service-card" data-id="shopify-colors" data-name="Change Theme Colors" data-cat="Shopify" data-price="70">
+              <h5 class="service-title">Change Theme Colors</h5>
+              <div class="price-tag">$70</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="shopify-app" data-name="Install App" data-cat="Shopify" data-price="80">
+              <h5 class="service-title">Install/Configure App</h5>
+              <div class="price-tag">$80</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-card" data-id="shopify-speed" data-name="Shopify Speed Fix" data-cat="Shopify" data-price="160">
+              <h5 class="service-title">Speed Optimization</h5>
+              <div class="price-tag">$160</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="shopify-product" data-name="Add Products" data-cat="Shopify" data-price="100">
+              <h5 class="service-title">Add 20 Products</h5>
+              <div class="price-tag">$100</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="service-card" data-id="shopify-checkout" data-name="Checkout Customization" data-cat="Shopify" data-price="150">
+              <h5 class="service-title">Checkout Customization</h5>
+              <div class="price-tag">$150</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ANDROID CATEGORY ===== -->
+      <div class="service-cat" id="cat-android">
+        <!-- Android Packages -->
+        <h3 class="section-title" data-aos="fade-right">📦 Android Packages</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="android-basic" data-name="Basic Android App" data-cat="Android" data-price="350">
+              <span class="service-badge">Starter</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Basic Android App</h5>
+              <div class="price-tag">$350</div>
+              <p class="service-desc">5 screens, Firebase, Play Store</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="android-pro" data-name="Pro Android App" data-cat="Android" data-price="750">
+              <span class="service-badge popular">Popular</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Professional Android App</h5>
+              <div class="price-tag">$750</div>
+              <p class="service-desc">12+ screens, API, analytics</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="android-premium" data-name="Premium Android App" data-cat="Android" data-price="1500">
+              <span class="service-badge">Premium</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Premium Android App</h5>
+              <div class="price-tag">$1,500</div>
+              <p class="service-desc">Custom features, backend, admin panel</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Android Tasks -->
+        <h3 class="section-title" data-aos="fade-right">📱 Android Tasks</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="android-bug" data-name="Bug Fix" data-cat="Android" data-price="50">
+              <h5 class="service-title">Bug Fix</h5>
+              <div class="price-tag">$50</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="service-card" data-id="android-ui" data-name="UI Update" data-cat="Android" data-price="100">
+              <h5 class="service-title">UI Update</h5>
+              <div class="price-tag">$100</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="android-api" data-name="API Integration" data-cat="Android" data-price="150">
+              <h5 class="service-title">API Integration</h5>
+              <div class="price-tag">$150</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-card" data-id="android-update" data-name="Play Store Update" data-cat="Android" data-price="80">
+              <h5 class="service-title">Play Store Update</h5>
+              <div class="price-tag">$80</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="android-push" data-name="Push Notifications" data-cat="Android" data-price="100">
+              <h5 class="service-title">Push Notifications</h5>
+              <div class="price-tag">$100</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="service-card" data-id="android-ads" data-name="AdMob Integration" data-cat="Android" data-price="120">
+              <h5 class="service-title">AdMob Integration</h5>
+              <div class="price-tag">$120</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CONSULTING CATEGORY ===== -->
+      <div class="service-cat" id="cat-consulting">
+        <!-- Consulting Packages -->
+        <h3 class="section-title" data-aos="fade-right">📦 Consulting Packages</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="consult-hour" data-name="Hourly Consulting" data-cat="Consulting" data-price="60">
+              <span class="service-badge">Hourly</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">1-Hour Consultation</h5>
+              <div class="price-tag">$60<small>/hr</small></div>
+              <p class="service-desc">Tech/SEO/Strategy consultation</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="consult-audit" data-name="Full Digital Audit" data-cat="Consulting" data-price="250">
+              <span class="service-badge popular">Popular</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Complete Digital Audit</h5>
+              <div class="price-tag">$250</div>
+              <p class="service-desc">Website/app audit + 90-day roadmap</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-id="consult-retainer" data-name="Monthly Retainer" data-cat="Consulting" data-price="500">
+              <span class="service-badge">Retainer</span>
+              <span class="service-check"><i class="fas fa-check"></i></span>
+              <h5 class="service-title">Monthly Advisory</h5>
+              <div class="price-tag">$500<small>/mo</small></div>
+              <p class="service-desc">4 calls/month, priority support</p>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Consulting Tasks -->
+        <h3 class="section-title" data-aos="fade-right">🧭 Consulting Tasks</h3>
+        <div class="row g-4 mb-5">
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
+            <div class="service-card" data-id="consult-crm" data-name="CRM Setup" data-cat="Consulting" data-price="200">
+              <h5 class="service-title">CRM Setup</h5>
+              <div class="price-tag">$200</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="service-card" data-id="consult-strategy" data-name="Strategy Session" data-cat="Consulting" data-price="150">
+              <h5 class="service-title">2-Hour Strategy Session</h5>
+              <div class="price-tag">$150</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card" data-id="consult-tech" data-name="Tech Stack Review" data-cat="Consulting" data-price="180">
+              <h5 class="service-title">Tech Stack Review</h5>
+              <div class="price-tag">$180</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-card" data-id="consult-roadmap" data-name="Product Roadmap" data-cat="Consulting" data-price="300">
+              <h5 class="service-title">Product Roadmap</h5>
+              <div class="price-tag">$300</div>
+              <button class="add-btn">Add to quote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Column - Quote Sidebar -->
+    <div class="col-lg-4">
+      <div class="quote-sidebar" data-aos="fade-left">
+        <div class="quote-header">
+          <h5 class="mb-0 text-white">📋 Your Quote</h5>
+          <span class="quote-count" id="quoteCount">0</span>
+        </div>
+        
+        <div id="quoteEmpty" class="p-4 text-center text-secondary">
+          <i class="fas fa-shopping-cart fa-2x mb-3 opacity-50"></i>
+          <p>Select services to build your quote</p>
+        </div>
+        
+        <div id="quoteItems" style="display: none;"></div>
+        
+        <div id="quoteTotals" style="display: none;">
+          <div class="p-3 border-top">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-secondary">Subtotal:</span>
+              <span class="fw-bold" id="quoteSubtotal">$0</span>
+            </div>
+            <div class="d-flex justify-content-between pt-2 mt-2 border-top">
+              <span class="h5 mb-0">Total:</span>
+              <span class="h5 mb-0" style="color:var(--accent);" id="quoteTotal">$0</span>
+            </div>
+          </div>
+          
+          <!-- Contact Form - Dark background for white text -->
+          <div class="contact-form">
+            <h6 class="text-white mb-3">📬 Get Your Quote</h6>
+            
+            <div class="mb-3">
+              <label class="text-white-50 small mb-1">Your Email *</label>
+              <input type="email" class="form-control" id="clientEmail" placeholder="you@example.com">
+              <div class="invalid-feedback" id="emailError">Please enter a valid email</div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="text-white-50 small mb-1">WhatsApp (optional)</label>
+              <div class="phone-input-group">
+                <div class="country-select-wrapper">
+                  <select class="country-select form-select" id="countryCode">
+                    <option value="92" data-code="+92" selected>🇵🇰 +92</option>
+                    <option value="1" data-code="+1">🇺🇸 +1</option>
+                    <option value="44" data-code="+44">🇬🇧 +44</option>
+                    <option value="91" data-code="+91">🇮🇳 +91</option>
+                    <option value="971" data-code="+971">🇦🇪 +971</option>
+                    <option value="966" data-code="+966">🇸🇦 +966</option>
+                    <option value="974" data-code="+974">🇶🇦 +974</option>
+                    <option value="965" data-code="+965">🇰🇼 +965</option>
+                    <option value="20" data-code="+20">🇪🇬 +20</option>
+                    <option value="966" data-code="+966">🇸🇦 +966</option>
+                    <option value="971" data-code="+971">🇦🇪 +971</option>
+                    <option value="973" data-code="+973">🇧🇭 +973</option>
+                    <option value="968" data-code="+968">🇴🇲 +968</option>
+                    <option value="962" data-code="+962">🇯🇴 +962</option>
+                    <option value="961" data-code="+961">🇱🇧 +961</option>
+                    <option value="963" data-code="+963">🇸🇾 +963</option>
+                    <option value="964" data-code="+964">🇮🇶 +964</option>
+                    <option value="967" data-code="+967">🇾🇪 +967</option>
+                    <option value="218" data-code="+218">🇱🇾 +218</option>
+                    <option value="216" data-code="+216">🇹🇳 +216</option>
+                    <option value="213" data-code="+213">🇩🇿 +213</option>
+                    <option value="212" data-code="+212">🇲🇦 +212</option>
+                    <option value="222" data-code="+222">🇲🇷 +222</option>
+                    <option value="221" data-code="+221">🇸🇳 +221</option>
+                    <option value="220" data-code="+220">🇬🇲 +220</option>
+                    <option value="224" data-code="+224">🇬🇳 +224</option>
+                    <option value="225" data-code="+225">🇨🇮 +225</option>
+                    <option value="226" data-code="+226">🇧🇫 +226</option>
+                    <option value="227" data-code="+227">🇳🇪 +227</option>
+                    <option value="228" data-code="+228">🇹🇬 +228</option>
+                    <option value="229" data-code="+229">🇧🇯 +229</option>
+                    <option value="230" data-code="+230">🇲🇺 +230</option>
+                    <option value="231" data-code="+231">🇱🇷 +231</option>
+                    <option value="232" data-code="+232">🇸🇱 +232</option>
+                    <option value="233" data-code="+233">🇬🇭 +233</option>
+                    <option value="234" data-code="+234">🇳🇬 +234</option>
+                    <option value="235" data-code="+235">🇹🇩 +235</option>
+                    <option value="236" data-code="+236">🇨🇫 +236</option>
+                    <option value="237" data-code="+237">🇨🇲 +237</option>
+                    <option value="238" data-code="+238">🇨🇻 +238</option>
+                    <option value="239" data-code="+239">🇸🇹 +239</option>
+                    <option value="240" data-code="+240">🇬🇶 +240</option>
+                    <option value="241" data-code="+241">🇬🇦 +241</option>
+                    <option value="242" data-code="+242">🇨🇬 +242</option>
+                    <option value="243" data-code="+243">🇨🇩 +243</option>
+                    <option value="244" data-code="+244">🇦🇴 +244</option>
+                    <option value="245" data-code="+245">🇬🇼 +245</option>
+                    <option value="246" data-code="+246">🇮🇴 +246</option>
+                    <option value="247" data-code="+247">🇦🇨 +247</option>
+                    <option value="248" data-code="+248">🇸🇨 +248</option>
+                    <option value="249" data-code="+249">🇸🇩 +249</option>
+                    <option value="250" data-code="+250">🇷🇼 +250</option>
+                    <option value="251" data-code="+251">🇪🇹 +251</option>
+                    <option value="252" data-code="+252">🇸🇴 +252</option>
+                    <option value="253" data-code="+253">🇩🇯 +253</option>
+                    <option value="254" data-code="+254">🇰🇪 +254</option>
+                    <option value="255" data-code="+255">🇹🇿 +255</option>
+                    <option value="256" data-code="+256">🇺🇬 +256</option>
+                    <option value="257" data-code="+257">🇧🇮 +257</option>
+                    <option value="258" data-code="+258">🇲🇿 +258</option>
+                    <option value="260" data-code="+260">🇿🇲 +260</option>
+                    <option value="261" data-code="+261">🇲🇬 +261</option>
+                    <option value="262" data-code="+262">🇾🇹 +262</option>
+                    <option value="263" data-code="+263">🇿🇼 +263</option>
+                    <option value="264" data-code="+264">🇳🇦 +264</option>
+                    <option value="265" data-code="+265">🇲🇼 +265</option>
+                    <option value="266" data-code="+266">🇱🇸 +266</option>
+                    <option value="267" data-code="+267">🇧🇼 +267</option>
+                    <option value="268" data-code="+268">🇸🇿 +268</option>
+                    <option value="269" data-code="+269">🇰🇲 +269</option>
+                    <option value="27" data-code="+27">🇿🇦 +27</option>
+                    <option value="30" data-code="+30">🇬🇷 +30</option>
+                    <option value="31" data-code="+31">🇳🇱 +31</option>
+                    <option value="32" data-code="+32">🇧🇪 +32</option>
+                    <option value="33" data-code="+33">🇫🇷 +33</option>
+                    <option value="34" data-code="+34">🇪🇸 +34</option>
+                    <option value="351" data-code="+351">🇵🇹 +351</option>
+                    <option value="352" data-code="+352">🇱🇺 +352</option>
+                    <option value="353" data-code="+353">🇮🇪 +353</option>
+                    <option value="354" data-code="+354">🇮🇸 +354</option>
+                    <option value="355" data-code="+355">🇦🇱 +355</option>
+                    <option value="356" data-code="+356">🇲🇹 +356</option>
+                    <option value="357" data-code="+357">🇨🇾 +357</option>
+                    <option value="358" data-code="+358">🇫🇮 +358</option>
+                    <option value="359" data-code="+359">🇧🇬 +359</option>
+                    <option value="36" data-code="+36">🇭🇺 +36</option>
+                    <option value="370" data-code="+370">🇱🇹 +370</option>
+                    <option value="371" data-code="+371">🇱🇻 +371</option>
+                    <option value="372" data-code="+372">🇪🇪 +372</option>
+                    <option value="373" data-code="+373">🇲🇩 +373</option>
+                    <option value="374" data-code="+374">🇦🇲 +374</option>
+                    <option value="375" data-code="+375">🇧🇾 +375</option>
+                    <option value="376" data-code="+376">🇦🇩 +376</option>
+                    <option value="377" data-code="+377">🇲🇨 +377</option>
+                    <option value="378" data-code="+378">🇸🇲 +378</option>
+                    <option value="379" data-code="+379">🇻🇦 +379</option>
+                    <option value="38" data-code="+38">🇷🇸 +38</option>
+                    <option value="381" data-code="+381">🇷🇸 +381</option>
+                    <option value="382" data-code="+382">🇲🇪 +382</option>
+                    <option value="383" data-code="+383">🇽🇰 +383</option>
+                    <option value="385" data-code="+385">🇭🇷 +385</option>
+                    <option value="386" data-code="+386">🇸🇮 +386</option>
+                    <option value="387" data-code="+387">🇧🇦 +387</option>
+                    <option value="389" data-code="+389">🇲🇰 +389</option>
+                    <option value="39" data-code="+39">🇮🇹 +39</option>
+                    <option value="40" data-code="+40">🇷🇴 +40</option>
+                    <option value="41" data-code="+41">🇨🇭 +41</option>
+                    <option value="420" data-code="+420">🇨🇿 +420</option>
+                    <option value="421" data-code="+421">🇸🇰 +421</option>
+                    <option value="423" data-code="+423">🇱🇮 +423</option>
+                    <option value="43" data-code="+43">🇦🇹 +43</option>
+                    <option value="45" data-code="+45">🇩🇰 +45</option>
+                    <option value="46" data-code="+46">🇸🇪 +46</option>
+                    <option value="47" data-code="+47">🇳🇴 +47</option>
+                    <option value="48" data-code="+48">🇵🇱 +48</option>
+                    <option value="49" data-code="+49">🇩🇪 +49</option>
+                    <option value="501" data-code="+501">🇧🇿 +501</option>
+                    <option value="502" data-code="+502">🇬🇹 +502</option>
+                    <option value="503" data-code="+503">🇸🇻 +503</option>
+                    <option value="504" data-code="+504">🇭🇳 +504</option>
+                    <option value="505" data-code="+505">🇳🇮 +505</option>
+                    <option value="506" data-code="+506">🇨🇷 +506</option>
+                    <option value="507" data-code="+507">🇵🇦 +507</option>
+                    <option value="508" data-code="+508">🇵🇲 +508</option>
+                    <option value="509" data-code="+509">🇭🇹 +509</option>
+                    <option value="51" data-code="+51">🇵🇪 +51</option>
+                    <option value="52" data-code="+52">🇲🇽 +52</option>
+                    <option value="53" data-code="+53">🇨🇺 +53</option>
+                    <option value="54" data-code="+54">🇦🇷 +54</option>
+                    <option value="55" data-code="+55">🇧🇷 +55</option>
+                    <option value="56" data-code="+56">🇨🇱 +56</option>
+                    <option value="57" data-code="+57">🇨🇴 +57</option>
+                    <option value="58" data-code="+58">🇻🇪 +58</option>
+                    <option value="591" data-code="+591">🇧🇴 +591</option>
+                    <option value="592" data-code="+592">🇬🇾 +592</option>
+                    <option value="593" data-code="+593">🇪🇨 +593</option>
+                    <option value="594" data-code="+594">🇬🇫 +594</option>
+                    <option value="595" data-code="+595">🇵🇾 +595</option>
+                    <option value="596" data-code="+596">🇲🇶 +596</option>
+                    <option value="597" data-code="+597">🇸🇷 +597</option>
+                    <option value="598" data-code="+598">🇺🇾 +598</option>
+                    <option value="599" data-code="+599">🇨🇼 +599</option>
+                    <option value="60" data-code="+60">🇲🇾 +60</option>
+                    <option value="61" data-code="+61">🇦🇺 +61</option>
+                    <option value="62" data-code="+62">🇮🇩 +62</option>
+                    <option value="63" data-code="+63">🇵🇭 +63</option>
+                    <option value="64" data-code="+64">🇳🇿 +64</option>
+                    <option value="65" data-code="+65">🇸🇬 +65</option>
+                    <option value="66" data-code="+66">🇹🇭 +66</option>
+                    <option value="670" data-code="+670">🇹🇱 +670</option>
+                    <option value="672" data-code="+672">🇳🇫 +672</option>
+                    <option value="673" data-code="+673">🇧🇳 +673</option>
+                    <option value="674" data-code="+674">🇳🇷 +674</option>
+                    <option value="675" data-code="+675">🇵🇬 +675</option>
+                    <option value="676" data-code="+676">🇹🇴 +676</option>
+                    <option value="677" data-code="+677">🇸🇧 +677</option>
+                    <option value="678" data-code="+678">🇻🇺 +678</option>
+                    <option value="679" data-code="+679">🇫🇯 +679</option>
+                    <option value="680" data-code="+680">🇵🇼 +680</option>
+                    <option value="681" data-code="+681">🇼🇫 +681</option>
+                    <option value="682" data-code="+682">🇨🇰 +682</option>
+                    <option value="683" data-code="+683">🇳🇺 +683</option>
+                    <option value="685" data-code="+685">🇼🇸 +685</option>
+                    <option value="686" data-code="+686">🇰🇮 +686</option>
+                    <option value="687" data-code="+687">🇳🇨 +687</option>
+                    <option value="688" data-code="+688">🇹🇻 +688</option>
+                    <option value="689" data-code="+689">🇵🇫 +689</option>
+                    <option value="690" data-code="+690">🇹🇰 +690</option>
+                    <option value="691" data-code="+691">🇫🇲 +691</option>
+                    <option value="692" data-code="+692">🇲🇭 +692</option>
+                    <option value="7" data-code="+7">🇷🇺 +7</option>
+                    <option value="81" data-code="+81">🇯🇵 +81</option>
+                    <option value="82" data-code="+82">🇰🇷 +82</option>
+                    <option value="84" data-code="+84">🇻🇳 +84</option>
+                    <option value="86" data-code="+86">🇨🇳 +86</option>
+                    <option value="90" data-code="+90">🇹🇷 +90</option>
+                    <option value="91" data-code="+91">🇮🇳 +91</option>
+                    <option value="92" data-code="+92" selected>🇵🇰 +92</option>
+                    <option value="93" data-code="+93">🇦🇫 +93</option>
+                    <option value="94" data-code="+94">🇱🇰 +94</option>
+                    <option value="95" data-code="+95">🇲🇲 +95</option>
+                    <option value="98" data-code="+98">🇮🇷 +98</option>
+                    <option value="212" data-code="+212">🇲🇦 +212</option>
+                    <option value="213" data-code="+213">🇩🇿 +213</option>
+                    <option value="216" data-code="+216">🇹🇳 +216</option>
+                    <option value="218" data-code="+218">🇱🇾 +218</option>
+                    <option value="220" data-code="+220">🇬🇲 +220</option>
+                    <option value="221" data-code="+221">🇸🇳 +221</option>
+                    <option value="222" data-code="+222">🇲🇷 +222</option>
+                    <option value="223" data-code="+223">🇲🇱 +223</option>
+                    <option value="224" data-code="+224">🇬🇳 +224</option>
+                    <option value="225" data-code="+225">🇨🇮 +225</option>
+                    <option value="226" data-code="+226">🇧🇫 +226</option>
+                    <option value="227" data-code="+227">🇳🇪 +227</option>
+                    <option value="228" data-code="+228">🇹🇬 +228</option>
+                    <option value="229" data-code="+229">🇧🇯 +229</option>
+                    <option value="230" data-code="+230">🇲🇺 +230</option>
+                    <option value="231" data-code="+231">🇱🇷 +231</option>
+                    <option value="232" data-code="+232">🇸🇱 +232</option>
+                    <option value="233" data-code="+233">🇬🇭 +233</option>
+                    <option value="234" data-code="+234">🇳🇬 +234</option>
+                    <option value="235" data-code="+235">🇹🇩 +235</option>
+                    <option value="236" data-code="+236">🇨🇫 +236</option>
+                    <option value="237" data-code="+237">🇨🇲 +237</option>
+                    <option value="238" data-code="+238">🇨🇻 +238</option>
+                    <option value="239" data-code="+239">🇸🇹 +239</option>
+                    <option value="240" data-code="+240">🇬🇶 +240</option>
+                    <option value="241" data-code="+241">🇬🇦 +241</option>
+                    <option value="242" data-code="+242">🇨🇬 +242</option>
+                    <option value="243" data-code="+243">🇨🇩 +243</option>
+                    <option value="244" data-code="+244">🇦🇴 +244</option>
+                    <option value="245" data-code="+245">🇬🇼 +245</option>
+                    <option value="246" data-code="+246">🇮🇴 +246</option>
+                    <option value="247" data-code="+247">🇦🇨 +247</option>
+                    <option value="248" data-code="+248">🇸🇨 +248</option>
+                    <option value="249" data-code="+249">🇸🇩 +249</option>
+                    <option value="250" data-code="+250">🇷🇼 +250</option>
+                    <option value="251" data-code="+251">🇪🇹 +251</option>
+                    <option value="252" data-code="+252">🇸🇴 +252</option>
+                    <option value="253" data-code="+253">🇩🇯 +253</option>
+                    <option value="254" data-code="+254">🇰🇪 +254</option>
+                    <option value="255" data-code="+255">🇹🇿 +255</option>
+                    <option value="256" data-code="+256">🇺🇬 +256</option>
+                    <option value="257" data-code="+257">🇧🇮 +257</option>
+                    <option value="258" data-code="+258">🇲🇿 +258</option>
+                    <option value="260" data-code="+260">🇿🇲 +260</option>
+                    <option value="261" data-code="+261">🇲🇬 +261</option>
+                    <option value="262" data-code="+262">🇾🇹 +262</option>
+                    <option value="263" data-code="+263">🇿🇼 +263</option>
+                    <option value="264" data-code="+264">🇳🇦 +264</option>
+                    <option value="265" data-code="+265">🇲🇼 +265</option>
+                    <option value="266" data-code="+266">🇱🇸 +266</option>
+                    <option value="267" data-code="+267">🇧🇼 +267</option>
+                    <option value="268" data-code="+268">🇸🇿 +268</option>
+                    <option value="269" data-code="+269">🇰🇲 +269</option>
+                    <option value="27" data-code="+27">🇿🇦 +27</option>
+                  </select>
+                </div>
+                <div class="phone-number-input">
+                  <input type="tel" class="form-control" id="clientPhone" placeholder="3001234567">
+                </div>
+              </div>
+              <small class="text-white-50">Enter number without leading zero</small>
+            </div>
+            
+            <div class="d-grid gap-2 mt-3">
+              <button class="btn btn-accent" id="sendQuoteBtn" disabled>
+                <i class="fas fa-envelope me-2"></i> Send Quote via Email
+              </button>
+              
+              <a href="#" id="whatsappLink" target="_blank" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp me-2"></i> Open in WhatsApp
+              </a>
+              
+              <button class="btn btn-outline-secondary btn-sm mt-2" id="clearCartBtn">Clear All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-white">✓ Quote Sent!</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+        <h5 class="text-white">Thank You!</h5>
+        <p class="text-white-50">Your quote has been sent to:</p>
+        <p class="fw-bold text-white" id="sentEmailDisplay"></p>
+        <p class="text-white-50 mt-2">We'll get back to you as soon as possible.</p>
+      </div>
+      <div class="modal-footer border-secondary">
+        <button type="button" class="btn btn-accent" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  // Initialize AOS
+  AOS.init({
+    duration: 800,
+    once: true,
+    offset: 100
+  });
+
+  // Initialize Select2 for country dropdown
+  $(document).ready(function() {
+    $('.country-select').select2({
+      placeholder: "Select country",
+      allowClear: false,
+      width: '100%',
+      minimumResultsForSearch: 10
+    });
+  });
+
+  // CSRF Token Helper
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const nav = document.getElementById('mainNav');
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // Theme Toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  const body = document.body;
+  
+  if (themeBtn) {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') body.classList.add('dark-mode');
+    
+    themeBtn.addEventListener('click', function() {
+      body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+      updateThemeIcon();
+    });
+    
+    function updateThemeIcon() {
+      const icon = themeBtn.querySelector('.material-symbols-outlined');
+      if (icon) icon.textContent = body.classList.contains('dark-mode') ? 'light_mode' : 'dark_mode';
+    }
+    updateThemeIcon();
+  }
+
+  // Quote Calculator
+  let selectedItems = new Set();
+  
+  // Category tabs
+  document.querySelectorAll('.cat-tab').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.service-cat').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById('cat-' + this.dataset.cat).classList.add('active');
+    });
+  });
+
+  // Add to quote buttons
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const card = this.closest('.service-card');
+      const itemId = card.dataset.id;
+      
+      if (selectedItems.has(itemId)) {
+        selectedItems.delete(itemId);
+        card.classList.remove('selected');
+        this.textContent = 'Add to quote';
+      } else {
+        selectedItems.add(itemId);
+        card.classList.add('selected');
+        this.textContent = '✓ Added';
+      }
+      updateQuote();
+    });
+  });
+
+  function updateQuote() {
+    const items = [];
+    let total = 0;
+    
+    selectedItems.forEach(id => {
+      const card = document.querySelector(`[data-id="${id}"]`);
+      if (card) {
+        const price = parseFloat(card.dataset.price);
+        items.push({
+          id,
+          name: card.dataset.name,
+          cat: card.dataset.cat,
+          price
+        });
+        total += price;
+      }
+    });
+    
+    const count = items.length;
+    document.getElementById('quoteCount').textContent = count;
+    
+    if (count === 0) {
+      document.getElementById('quoteEmpty').style.display = 'block';
+      document.getElementById('quoteItems').style.display = 'none';
+      document.getElementById('quoteTotals').style.display = 'none';
+      document.getElementById('sendQuoteBtn').disabled = true;
+      document.getElementById('whatsappLink').style.display = 'none';
+    } else {
+      document.getElementById('quoteEmpty').style.display = 'none';
+      document.getElementById('quoteItems').style.display = 'block';
+      document.getElementById('quoteTotals').style.display = 'block';
+      document.getElementById('sendQuoteBtn').disabled = false;
+      document.getElementById('whatsappLink').style.display = 'inline-flex';
+      
+      let itemsHtml = '<div class="quote-items">';
+      items.forEach(item => {
+        itemsHtml += `
+          <div class="quote-item">
+            <div>
+              <div class="quote-item-name">${item.name}</div>
+              <div class="small text-secondary">${item.cat}</div>
+            </div>
+            <div>
+              <span class="quote-item-price">$${item.price}</span>
+              <span class="quote-item-remove" data-id="${item.id}"><i class="fas fa-times"></i></span>
+            </div>
+          </div>
+        `;
+      });
+      itemsHtml += '</div>';
+      document.getElementById('quoteItems').innerHTML = itemsHtml;
+      
+      document.querySelectorAll('.quote-item-remove').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const id = this.dataset.id;
+          const card = document.querySelector(`[data-id="${id}"]`);
+          if (card) {
+            selectedItems.delete(id);
+            card.classList.remove('selected');
+            card.querySelector('.add-btn').textContent = 'Add to quote';
+          }
+          updateQuote();
+        });
+      });
+      
+      document.getElementById('quoteSubtotal').textContent = '$' + total;
+      document.getElementById('quoteTotal').textContent = '$' + total;
+      
+      // Update WhatsApp link
+      updateWhatsAppLink();
+    }
+  }
+
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function updateWhatsAppLink() {
+    const countryCode = document.getElementById('countryCode').value;
+    const phoneNumber = document.getElementById('clientPhone').value.trim();
+    const email = document.getElementById('clientEmail').value.trim();
+    const items = [];
+    
+    selectedItems.forEach(id => {
+      const card = document.querySelector(`[data-id="${id}"]`);
+      if (card) {
+        items.push({
+          name: card.dataset.name,
+          cat: card.dataset.cat,
+          price: parseFloat(card.dataset.price)
+        });
+      }
+    });
+    
+    const total = items.reduce((sum, item) => sum + item.price, 0);
+    
+    let message = "Hi Ahmad! I'd like a quote for:\n\n";
+    items.forEach(item => {
+      message += `• ${item.name} (${item.cat}) - $${item.price}\n`;
+    });
+    message += `\nTotal: $${total}`;
+    if (email) message += `\nEmail: ${email}`;
+    if (phoneNumber) message += `\nWhatsApp: +${countryCode} ${phoneNumber}`;
+    
+    const whatsappLink = document.getElementById('whatsappLink');
+    whatsappLink.href = `https://wa.me/923190642704?text=${encodeURIComponent(message)}`;
+  }
+
+  // Clear cart
+  document.getElementById('clearCartBtn').addEventListener('click', function() {
+    selectedItems.forEach(id => {
+      const card = document.querySelector(`[data-id="${id}"]`);
+      if (card) {
+        card.classList.remove('selected');
+        card.querySelector('.add-btn').textContent = 'Add to quote';
+      }
+    });
+    selectedItems.clear();
+    updateQuote();
+  });
+
+  // Update WhatsApp link when phone or email changes
+  document.getElementById('clientPhone').addEventListener('input', updateWhatsAppLink);
+  document.getElementById('clientEmail').addEventListener('input', updateWhatsAppLink);
+  document.getElementById('countryCode').addEventListener('change', updateWhatsAppLink);
+
+  // Send quote - with validation
+  document.getElementById('sendQuoteBtn').addEventListener('click', function() {
+    const email = document.getElementById('clientEmail').value.trim();
+    const countryCode = document.getElementById('countryCode').value;
+    const phoneNumber = document.getElementById('clientPhone').value.trim();
+    
+    // Reset validation
+    document.getElementById('clientEmail').classList.remove('is-invalid');
+    document.getElementById('emailError').classList.remove('show');
+    
+    let fullPhone = '';
+    if (phoneNumber) {
+      fullPhone = `+${countryCode} ${phoneNumber}`;
+    }
+    
+    if (!email) {
+      document.getElementById('clientEmail').classList.add('is-invalid');
+      document.getElementById('emailError').classList.add('show');
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      document.getElementById('clientEmail').classList.add('is-invalid');
+      document.getElementById('emailError').classList.add('show');
+      return;
+    }
+    
+    const items = [];
+    selectedItems.forEach(id => {
+      const card = document.querySelector(`[data-id="${id}"]`);
+      if (card) {
+        items.push({
+          name: card.dataset.name,
+          cat: card.dataset.cat,
+          price: parseFloat(card.dataset.price)
+        });
+      }
+    });
+    
+    const total = items.reduce((sum, item) => sum + item.price, 0);
+    
+    // Show loading state
+    const btn = this;
+    const originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
+    
+    // Send to Django backend
+    fetch('/send-quote-email/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      body: JSON.stringify({
+        email: email,
+        name: email.split('@')[0],
+        phone: fullPhone,
+        delivery_method: 'email',
+        items: items,
+        total: total
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      
+      if (data.success) {
+        document.getElementById('sentEmailDisplay').textContent = email;
+        new bootstrap.Modal(document.getElementById('successModal')).show();
+        document.getElementById('clearCartBtn').click();
+        document.getElementById('clientEmail').value = '';
+        document.getElementById('clientPhone').value = '';
+      } else {
+        alert('Error: ' + (data.error || 'Unknown error'));
+      }
+    })
+    .catch(error => {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      alert('Network error. Please check your connection and try again.');
+      console.error('Error:', error);
+    });
+  });
+</script>
+</body>
+</html>

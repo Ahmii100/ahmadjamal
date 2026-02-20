@@ -1,0 +1,3013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmad Jamal · Android · SEO · Consultant</title>
+    <!-- Bootstrap 5 (light grid) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Font: Inter (professional clean) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <!-- AOS (subtle scroll animation) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Material Symbols (for elegant theme icon) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f2f6fc;
+            transition: background-color 0.3s ease, color 0.25s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== SILVER-GREY LIGHT MODE ========= */
+        body:not(.dark-mode) {
+            background: #f2f6fc;
+            color: #1d2b3c;
+        }
+
+        body:not(.dark-mode) .navbar-custom {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(170, 190, 210, 0.4);
+        }
+
+        /* ========== DARK MODE ========= */
+        body.dark-mode {
+            background: #0f1724;
+            color: #eef3fd;
+        }
+
+        body.dark-mode .navbar-custom {
+            background: rgba(10, 20, 30, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #253c54;
+        }
+
+        /* ========== NAVBAR (clean, glass, refined) ========= */
+        .navbar-custom {
+            backdrop-filter: blur(16px) saturate(200%);
+            -webkit-backdrop-filter: blur(16px) saturate(200%);
+            box-shadow: 0 8px 24px -12px rgba(60, 80, 105, 0.15);
+            padding: 0.6rem 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.6);
+            transition: background 0.3s;
+            position: sticky;
+            top: 0;
+            z-index: 1050;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* LEFT: PREMIUM LOGO */
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .brand-logo:hover {
+            transform: scale(1.02) translateX(4px);
+        }
+
+        .logo-block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #1f3a52, #2b5075);
+            width: 56px;
+            height: 56px;
+            border-radius: 30% 70% 70% 30% / 30% 50% 50% 70%;
+            box-shadow: 0 12px 20px -12px #2f4b6e;
+            color: white;
+            font-size: 30px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .brand-logo:hover .logo-block {
+            border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
+            background: linear-gradient(145deg, #2a4a6e, #31638b);
+        }
+
+        .brand-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1f3a52;
+            letter-spacing: -0.02em;
+            transition: color 0.2s;
+        }
+
+        body.dark-mode .brand-text {
+            color: #d0e2ff;
+        }
+
+        .brand-logo:hover .brand-text {
+            color: #2b5075;
+        }
+
+        /* ---------- CENTER BUTTONS (HOME first, professional) ---------- */
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.3rem;
+            font-weight: 550;
+            color: #2b4058;
+            border-radius: 40px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        body.dark-mode .nav-btn {
+            color: #d0e2ff;
+        }
+
+        .nav-btn:hover {
+            background: rgba(70, 110, 160, 0.06);
+            transform: translateY(-2px);
+            color: #0b2339;
+        }
+
+        body.dark-mode .nav-btn:hover {
+            background: rgba(100, 150, 220, 0.15);
+            color: white;
+        }
+
+        /* subtle indicator (no heavy underline) */
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: #8fb1d0;
+            border-radius: 4px;
+            transform: translateX(-50%);
+            transition: width 0.2s;
+        }
+
+        .nav-btn:hover::after {
+            width: 30%;
+        }
+
+        /* ---------- RIGHT SIDE: ATTRACTIVE THEME ICON (redesigned, no emoji) ---------- */
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        #theme-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            color: #2b4a70;
+        }
+
+        #theme-toggle .material-symbols-outlined {
+            font-size: 32px;
+            font-variation-settings: 'FILL' 0, 'wght' 350;
+            transition: all 0.2s;
+        }
+
+        #theme-toggle:hover {
+            background: rgba(130, 170, 210, 0.15);
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        body.dark-mode #theme-toggle {
+            color: #ffdba0;
+        }
+
+        body.dark-mode #theme-toggle .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400;
+        }
+
+        /* ========== HERO SECTION (wider, professional, attractive) ========= */
+        .hero-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 3rem;
+            max-width: 100%;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 5rem;
+            flex-wrap: wrap;
+            max-width: 1600px;  /* wider */
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-content {
+            flex: 1 1 550px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(100, 130, 170, 0.1);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2b5075;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        body.dark-mode .hero-badge {
+            background: rgba(150, 190, 240, 0.1);
+            color: #c0d6f0;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-title .name {
+            color: #2b5075;
+            font-weight: 700;
+        }
+
+        body.dark-mode .hero-title .name {
+            color: #b6d4ff;
+        }
+
+        .hero-tagline {
+            font-size: 1.6rem;
+            font-weight: 450;
+            margin-bottom: 1.8rem;
+            color: #2f557a;
+            line-height: 1.4;
+            max-width: 700px;
+        }
+
+        body.dark-mode .hero-tagline {
+            color: #b8d1f0;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+            color: #3f6185;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .hero-description {
+            color: #b0c9e5;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* professional buttons — no emojis */
+        .btn-about {
+            background: #2b5075;
+            color: white;
+            padding: 0.9rem 2.8rem;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 550;
+            text-decoration: none;
+            transition: all 0.25s;
+            box-shadow: 0 10px 18px -10px #1d3a55;
+            border: none;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-about:hover {
+            background: #1e3f60;
+            transform: translateY(-3px);
+            box-shadow: 0 18px 24px -12px #0d2a40;
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #9bb7d4;
+            color: #1d3f60;
+            padding: 0.9rem 2.8rem;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 550;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .btn-outline:hover {
+            background: rgba(155, 183, 212, 0.2);
+            border-color: #2b5f88;
+            color: #0d3452;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode .btn-outline {
+            border-color: #5f86ac;
+            color: #d2e4ff;
+        }
+        body.dark-mode .btn-outline:hover {
+            background: rgba(100, 150, 210, 0.15);
+            border-color: #a3c6f0;
+        }
+
+        /* Hero image (your photo) */
+        .hero-image {
+            flex: 1 1 420px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-frame {
+            max-width: 460px;
+            width: 100%;
+            border-radius: 40% 60% 50% 50% / 40% 50% 50% 60%;
+            overflow: hidden;
+            box-shadow: 0 35px 45px -25px rgba(20, 45, 70, 0.25);
+            background: white;
+            padding: 6px;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(4px);
+            transition: transform 0.3s;
+        }
+
+        .image-frame:hover {
+            transform: scale(1.02);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: inherit;
+            background: white;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+        }
+
+        /* responsive */
+        @media (max-width: 1200px) {
+            .hero-title { font-size: 3.5rem; }
+            .hero-tagline { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 950px) {
+            .nav-container { flex-wrap: wrap; }
+            .nav-center { order: 3; width: 100%; margin-top: 10px; }
+            .navbar-custom { padding: 0.6rem 1.5rem; }
+            .hero-container { flex-direction: column-reverse; text-align: center; }
+            .hero-buttons { justify-content: center; }
+            .hero-description { margin-left: auto; margin-right: auto; }
+        }
+    </style>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVBAR (professional, home button, attractive theme icon) -->
+    <nav class="navbar-custom">
+        <div class="nav-container">
+            <!-- LEFT: Ahmad Jamal logo -->
+            <a href="/" class="brand-logo">
+                <span class="logo-block">AJ</span>
+                <span class="brand-text">Ahmad Jamal</span>
+            </a>
+
+            <!-- CENTER: HOME first, no emoji buttons -->
+            <div class="nav-center">
+                <a href="/" class="nav-btn">Home</a>
+
+                <a href="/skills/" class="nav-btn">Skills</a>
+                <a href="/services/" class="nav-btn">Services</a>
+                <a href="/about/" class="nav-btn">About</a>
+                <a href="/contact/" class="nav-btn">Contact</a>
+            </div>
+
+            <!-- RIGHT: new attractive theme icon (material symbol) -->
+            <div class="nav-right">
+                <button id="theme-toggle" title="light/dark">
+                    <span class="material-symbols-outlined">dark_mode</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (wider, professional, no distracting emojis) -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <!-- left content -->
+            <div class="hero-content" data-aos="fade-right" data-aos-duration="700">
+                <span class="hero-badge">Senior Developer & Consultant</span>
+                <h1 class="hero-title">
+                    I'm <span class="name">Ahmad Jamal</span>
+                </h1>
+                <div class="hero-tagline">
+                    Android App Developer · SEO Specialist · Digital Solutions Consultant
+                </div>
+                <p class="hero-description">
+                    Crafting high-performance mobile experiences, boosting search visibility, 
+                    and delivering digital strategies that scale. Professional, precise, and results-driven.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/about" class="btn-about">About me</a>
+                    <a href="/contact/" class="btn-outline">Let's talk</a>
+                </div>
+            </div>
+
+            <!-- right image with white background blend -->
+            <div class="hero-image" data-aos="fade-left" data-aos-duration="700" data-aos-delay="50">
+                <div class="image-frame">
+                    <img src="static/images/jamalpic.jpeg" alt="Ahmad Jamal" onerror="this.src='https://placehold.co/400x400/ffffff/e9eef2?text=Ahmad+Jamal'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- dummy about anchor -->
+    <div id="about" style="height: 10px;"></div>
+
+    <!-- scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 700 });
+    </script>
+
+    <!-- UPDATED THEME TOGGLE SCRIPT WITH localStorage -->
+    <script>
+        (function() {
+            const body = document.body;
+            const themeBtn = document.getElementById('theme-toggle');
+            
+            if (themeBtn) {
+                // Load saved theme on page load
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    body.classList.add('dark-mode');
+                }
+                
+                // Update icon function
+                function updateThemeIcon() {
+                    const iconSpan = themeBtn.querySelector('.material-symbols-outlined');
+                    if (iconSpan) {
+                        iconSpan.textContent = body.classList.contains('dark-mode') ? 'light_mode' : 'dark_mode';
+                    }
+                }
+                
+                // Toggle theme function
+                function toggleTheme() {
+                    body.classList.toggle('dark-mode');
+                    
+                    // Save to localStorage
+                    if (body.classList.contains('dark-mode')) {
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        localStorage.setItem('theme', 'light');
+                    }
+                    
+                    updateThemeIcon();
+                }
+                
+                // Add click handler
+                themeBtn.addEventListener('click', toggleTheme);
+                
+                // Set initial icon
+                updateThemeIcon();
+            }
+        })();
+    </script>
+
+
+
+    <!-- ========== CIRCULAR SERVICES SECTION (wider, perfect spacing) ========= -->
+<section class="circle-services">
+    <!-- simple header -->
+    <div class="circle-header" data-aos="fade-up">
+        <span class="circle-tag">expertise</span>
+        <h2 class="circle-title">Services</h2>
+    </div>
+
+    <!-- three circles in a row with more width -->
+    <div class="circles-row" data-aos="fade-up">
+        <!-- circle 1: android -->
+        <div class="circle-item">
+            <div class="circle">
+                <span class="circle-icon material-symbols-outlined">android</span>
+            </div>
+            <h3>Android Development</h3>
+            <p>Native apps, clean code, modern UI</p>
+        </div>
+
+        <!-- circle 2: seo -->
+        <div class="circle-item">
+            <div class="circle">
+                <span class="circle-icon material-symbols-outlined">insights</span>
+            </div>
+            <h3>SEO Specialist</h3>
+            <p>Rankings, traffic, conversions</p>
+        </div>
+
+        <!-- circle 3: consulting -->
+        <div class="circle-item">
+            <div class="circle">
+                <span class="circle-icon material-symbols-outlined">support_agent</span>
+            </div>
+            <h3>Digital Consultant</h3>
+            <p>Strategy, architecture, growth</p>
+        </div>
+    </div>
+
+    <!-- one clean button to services page -->
+    <div class="circle-footer" data-aos="fade-up">
+        <a href="/services/" class="circle-button">
+            explore all services →
+        </a>
+    </div>
+</section>
+
+<!-- ========== WIDER CIRCLE STYLES (add inside your <style>) ========= -->
+<style>
+    /* circle services - wider layout */
+    .circle-services {
+        padding: 100px 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* header */
+    .circle-header {
+        margin-bottom: 60px;
+    }
+
+    .circle-tag {
+        display: block;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: #6f8faf;
+        margin-bottom: 12px;
+    }
+
+    .circle-title {
+        font-size: 3.5rem;
+        font-weight: 500;
+        color: #1d2f42;
+        margin: 0;
+    }
+
+    body.dark-mode .circle-title {
+        color: #ecf3fc;
+    }
+
+    /* circles row - wider gaps, full width */
+    .circles-row {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        gap: 40px;
+        margin: 0 auto 70px auto;
+        padding: 0 20px;
+        flex-wrap: wrap;
+        max-width: 1200px;
+    }
+
+    /* each circle item - more width */
+    .circle-item {
+        flex: 0 1 280px;
+        text-align: center;
+    }
+
+    /* bigger circles */
+    .circle {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: #f0f5fc;
+        margin: 0 auto 25px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        box-shadow: 0 5px 15px rgba(43, 80, 117, 0.05);
+    }
+
+    body.dark-mode .circle {
+        background: #1f3147;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .circle:hover {
+        transform: scale(1.05);
+        background: #e3eefa;
+        border-color: #9bb9da;
+        box-shadow: 0 15px 30px -8px #2b5075;
+    }
+
+    body.dark-mode .circle:hover {
+        background: #2a405b;
+        border-color: #7fa3cc;
+        box-shadow: 0 15px 30px -8px #0a1a2a;
+    }
+
+    /* bigger icons inside circles */
+    .circle-icon {
+        font-size: 80px !important;
+        color: #2b5a88;
+        font-variation-settings: 'FILL' 0, 'wght' 300;
+    }
+
+    body.dark-mode .circle-icon {
+        color: #a6c2e2;
+    }
+
+    .circle:hover .circle-icon {
+        font-variation-settings: 'FILL' 1, 'wght' 400;
+        color: #1d4a73;
+    }
+
+    /* text under circle - wider */
+    .circle-item h3 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 20px 0 10px 0;
+        color: #1d3449;
+    }
+
+    body.dark-mode .circle-item h3 {
+        color: #d4e4ff;
+    }
+
+    .circle-item p {
+        font-size: 1.1rem;
+        color: #4f6f8f;
+        margin: 0 auto;
+        line-height: 1.6;
+        max-width: 240px;
+    }
+
+    body.dark-mode .circle-item p {
+        color: #adc4e2;
+    }
+
+    /* wider button */
+    .circle-footer {
+        margin-top: 50px;
+    }
+
+    .circle-button {
+        display: inline-block;
+        background: transparent;
+        color: #2b5a88;
+        font-size: 1.3rem;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 14px 45px;
+        border: 2px solid #2b5a88;
+        border-radius: 50px;
+        transition: all 0.2s;
+        letter-spacing: 0.5px;
+    }
+
+    body.dark-mode .circle-button {
+        color: #a6c2e2;
+        border-color: #a6c2e2;
+    }
+
+    .circle-button:hover {
+        background: #2b5a88;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 25px -10px #1a3f60;
+    }
+
+    body.dark-mode .circle-button:hover {
+        background: #a6c2e2;
+        color: #0f1a26;
+    }
+
+    /* responsive */
+    @media (max-width: 1000px) {
+        .circle {
+            width: 160px;
+            height: 160px;
+        }
+        .circle-icon {
+            font-size: 70px !important;
+        }
+        .circle-item {
+            flex: 0 1 240px;
+        }
+    }
+
+    @media (max-width: 850px) {
+        .circles-row {
+            gap: 50px;
+        }
+        .circle-item {
+            flex: 0 1 280px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .circle-title {
+            font-size: 2.8rem;
+        }
+        .circle {
+            width: 150px;
+            height: 150px;
+        }
+        .circle-icon {
+            font-size: 65px !important;
+        }
+        .circle-button {
+            padding: 12px 35px;
+            font-size: 1.2rem;
+        }
+    }
+</style>
+
+
+<!-- ========== PROFESSIONAL SKILLS SECTION (concise, attractive, animated) ========= -->
+<section class="skills-professional">
+    <div class="skills-professional-container" data-aos="fade-up">
+        <!-- header with animation -->
+        <div class="skills-professional-header">
+            <span class="skills-professional-tag" data-aos="fade-right">expertise</span>
+            <h2 class="skills-professional-title" data-aos="fade-right" data-aos-delay="100">Technical <span class="title-accent">Skills</span></h2>
+            <p class="skills-professional-desc" data-aos="fade-right" data-aos-delay="150">Core competencies I bring to every project</p>
+        </div>
+
+        <!-- skills grid - 4 categories, each with animated bars -->
+        <div class="skills-professional-grid">
+            <!-- category 1: android -->
+            <div class="skill-category-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="category-card-header">
+                    <span class="category-card-icon">📱</span>
+                    <h3>Android</h3>
+                </div>
+                <div class="category-card-skills">
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="250">
+                        <div class="skill-bar-label">
+                            <span>Kotlin</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="280">
+                        <div class="skill-bar-label">
+                            <span>Java</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="310">
+                        <div class="skill-bar-label">
+                            <span>Jetpack Compose</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="340">
+                        <div class="skill-bar-label">
+                            <span>Firebase</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- category 2: seo -->
+            <div class="skill-category-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="category-card-header">
+                    <span class="category-card-icon">📈</span>
+                    <h3>SEO</h3>
+                </div>
+                <div class="category-card-skills">
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="350">
+                        <div class="skill-bar-label">
+                            <span>Technical SEO</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="380">
+                        <div class="skill-bar-label">
+                            <span>Keyword Strategy</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="410">
+                        <div class="skill-bar-label">
+                            <span>Analytics</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="440">
+                        <div class="skill-bar-label">
+                            <span>Ahrefs/SEMrush</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- category 3: consulting -->
+            <div class="skill-category-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="category-card-header">
+                    <span class="category-card-icon">💡</span>
+                    <h3>Consulting</h3>
+                </div>
+                <div class="category-card-skills">
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="450">
+                        <div class="skill-bar-label">
+                            <span>Digital Strategy</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="480">
+                        <div class="skill-bar-label">
+                            <span>Tech Architecture</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="510">
+                        <div class="skill-bar-label">
+                            <span>Team Leadership</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="540">
+                        <div class="skill-bar-label">
+                            <span>Agile/Scrum</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- category 4: tools -->
+            <div class="skill-category-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="category-card-header">
+                    <span class="category-card-icon">🛠️</span>
+                    <h3>Tools</h3>
+                </div>
+                <div class="category-card-skills">
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="550">
+                        <div class="skill-bar-label">
+                            <span>Android Studio</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="580">
+                        <div class="skill-bar-label">
+                            <span>Git</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="610">
+                        <div class="skill-bar-label">
+                            <span>Figma</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item" data-aos="fade-right" data-aos-delay="640">
+                        <div class="skill-bar-label">
+                            <span>Jira</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer with note and button -->
+        <div class="skills-professional-footer" data-aos="fade-up" data-aos-delay="700">
+            <p class="skills-professional-note">That's a snapshot — detailed experience and projects in skills section.</p>
+            <a href="/skills/" class="skills-professional-button">
+                <span>view complete skillset</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PROFESSIONAL SKILLS STYLES (add inside your <style>) ========= -->
+<style>
+    /* skills professional section */
+    .skills-professional {
+        width: 100%;
+        padding: 90px 5%;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    body.dark-mode .skills-professional {
+        background: linear-gradient(135deg, #0f1a26 0%, #142433 100%);
+    }
+
+    /* subtle background animation */
+    .skills-professional::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(75, 120, 170, 0.03) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 20s infinite ease-in-out;
+    }
+
+    .skills-professional::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(43, 80, 117, 0.03) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 25s infinite ease-in-out reverse;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(3%, 3%) scale(1.05); }
+    }
+
+    .skills-professional-container {
+        max-width: 1300px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* header */
+    .skills-professional-header {
+        margin-bottom: 60px;
+        text-align: center;
+    }
+
+    .skills-professional-tag {
+        display: inline-block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: #5f82a8;
+        margin-bottom: 15px;
+        background: rgba(95, 130, 168, 0.1);
+        padding: 6px 20px;
+        border-radius: 40px;
+    }
+
+    body.dark-mode .skills-professional-tag {
+        color: #9bb9da;
+        background: rgba(155, 185, 218, 0.1);
+    }
+
+    .skills-professional-title {
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: #1d2f42;
+        margin: 0 0 15px 0;
+        line-height: 1.2;
+    }
+
+    body.dark-mode .skills-professional-title {
+        color: #ecf3fc;
+    }
+
+    .title-accent {
+        color: #2b5a88;
+        position: relative;
+        display: inline-block;
+    }
+
+    body.dark-mode .title-accent {
+        color: #a6c2e2;
+    }
+
+    .title-accent::after {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: rgba(43, 90, 136, 0.15);
+        border-radius: 4px;
+        z-index: -1;
+    }
+
+    .skills-professional-desc {
+        font-size: 1.2rem;
+        color: #4f6f8f;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    body.dark-mode .skills-professional-desc {
+        color: #adc4e2;
+    }
+
+    /* skills grid - 4 columns */
+    .skills-professional-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        margin-bottom: 60px;
+    }
+
+    /* category cards */
+    .skill-category-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 28px;
+        padding: 28px 22px;
+        box-shadow: 0 15px 30px -12px rgba(30, 60, 90, 0.15);
+        transition: all 0.3s ease;
+    }
+
+    body.dark-mode .skill-category-card {
+        background: rgba(20, 35, 50, 0.7);
+        border-color: rgba(65, 100, 140, 0.4);
+        box-shadow: 0 15px 30px -12px #030b14;
+    }
+
+    .skill-category-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 40px -18px #1f3f60;
+        border-color: #9bb9da;
+    }
+
+    .category-card-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e0eaf5;
+    }
+
+    body.dark-mode .category-card-header {
+        border-bottom-color: #2d4663;
+    }
+
+    .category-card-icon {
+        font-size: 2rem;
+    }
+
+    .category-card-header h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1d3449;
+        margin: 0;
+    }
+
+    body.dark-mode .category-card-header h3 {
+        color: #d4e4ff;
+    }
+
+    /* skill bars */
+    .category-card-skills {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .skill-bar-item {
+        width: 100%;
+    }
+
+    .skill-bar-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        font-size: 0.95rem;
+        color: #2b5075;
+    }
+
+    body.dark-mode .skill-bar-label {
+        color: #b0c9e5;
+    }
+
+    .skill-bar-bg {
+        width: 100%;
+        height: 8px;
+        background: #e3eefa;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    body.dark-mode .skill-bar-bg {
+        background: #253d57;
+    }
+
+    .skill-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #2b5a88, #4f8fc0);
+        border-radius: 20px;
+        width: 0;
+        animation: fillBar 1.5s ease-out forwards;
+        transform-origin: left;
+    }
+
+    @keyframes fillBar {
+        from { width: 0; }
+        to { width: var(--width); }
+    }
+
+    /* footer */
+    .skills-professional-footer {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .skills-professional-note {
+        font-size: 1.1rem;
+        color: #5f82a8;
+        margin-bottom: 25px;
+        font-style: italic;
+        background: rgba(95, 130, 168, 0.05);
+        padding: 15px 25px;
+        border-radius: 50px;
+    }
+
+    body.dark-mode .skills-professional-note {
+        color: #8fb1d0;
+        background: rgba(143, 177, 208, 0.05);
+    }
+
+    .skills-professional-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: #2b5075;
+        color: white;
+        padding: 16px 45px;
+        border-radius: 60px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s;
+        border: none;
+        box-shadow: 0 10px 20px -8px #1e3f60;
+    }
+
+    body.dark-mode .skills-professional-button {
+        background: #2d5a88;
+        box-shadow: 0 10px 20px -8px #0a1e30;
+    }
+
+    .skills-professional-button:hover {
+        background: #1a3f60;
+        gap: 18px;
+        transform: translateY(-4px);
+        box-shadow: 0 20px 30px -12px #14344f;
+    }
+
+    .skills-professional-button .material-symbols-outlined {
+        font-size: 1.5rem;
+    }
+
+    /* responsive */
+    @media (max-width: 1100px) {
+        .skills-professional-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .skills-professional-grid {
+            grid-template-columns: 1fr;
+        }
+        .skills-professional-title {
+            font-size: 2.5rem;
+        }
+        .skills-professional-button {
+            padding: 14px 35px;
+            font-size: 1.1rem;
+        }
+    }
+</style>
+
+
+
+<!-- ========== 3D AUTO-SLIDING TESTIMONIALS SECTION (NO DOTS) ========= -->
+<section id="testimonials" class="testimonials-3d-section">
+    <div class="testimonials-header" data-aos="fade-up">
+        <span class="testimonials-tag">client feedback</span>
+        <h2 class="testimonials-title">What <span class="title-accent">Clients Say</span></h2>
+        <p class="testimonials-desc">Real feedback from real projects across Europe</p>
+    </div>
+
+    <!-- 3D auto-slider container -->
+    <div class="slider-3d-container">
+        <div class="slider-3d-track" id="slider3DTrack">
+            <!-- review 1: Android -->
+            <div class="slide-3d">
+                <div class="testimonial-card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="client-image-3d">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/100x100/2b5a88/ffffff?text=JS'">
+                            </div>
+                            <div class="skill-badge-3d">Android App</div>
+                            <h4>James Smith</h4>
+                            <p class="client-title">CEO, TechStart Solutions</p>
+                            <div class="rating-3d">★★★★★</div>
+                        </div>
+                        <div class="card-back">
+                            <p class="testimonial-text-3d">"Ahmad developed our e-commerce app from scratch. Clean architecture, exceptional performance, delivered 2 weeks early!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- review 2: SEO -->
+            <div class="slide-3d">
+                <div class="testimonial-card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="client-image-3d">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/100x100/2b5a88/ffffff?text=EJ'">
+                            </div>
+                            <div class="skill-badge-3d">SEO</div>
+                            <h4>Emma Johnson</h4>
+                            <p class="client-title">Marketing Director</p>
+                            <div class="rating-3d">★★★★★</div>
+                        </div>
+                        <div class="card-back">
+                            <p class="testimonial-text-3d">"200% organic traffic increase in 3 months! Technical SEO audit and keyword strategy transformed our online presence."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- review 3: Consulting -->
+            <div class="slide-3d">
+                <div class="testimonial-card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="client-image-3d">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/100x100/2b5a88/ffffff?text=MW'">
+                            </div>
+                            <div class="skill-badge-3d">Tech Consulting</div>
+                            <h4>Michael Williams</h4>
+                            <p class="client-title">Founder, FinTech</p>
+                            <div class="rating-3d">★★★★★</div>
+                        </div>
+                        <div class="card-back">
+                            <p class="testimonial-text-3d">"Ahmad helped us choose the right tech stack and architecture for our fintech startup. Saved us months of development."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- review 4: Android -->
+            <div class="slide-3d">
+                <div class="testimonial-card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="client-image-3d">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/100x100/2b5a88/ffffff?text=SB'">
+                            </div>
+                            <div class="skill-badge-3d">Android Dev</div>
+                            <h4>Sarah Brown</h4>
+                            <p class="client-title">Product Manager</p>
+                            <div class="rating-3d">★★★★★</div>
+                        </div>
+                        <div class="card-back">
+                            <p class="testimonial-text-3d">"The fitness app Ahmad built has 50K+ downloads and 4.8 star rating. Users love the smooth UI and real-time features."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- review 5: SEO -->
+            <div class="slide-3d">
+                <div class="testimonial-card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="client-image-3d">
+                                <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/100x100/2b5a88/ffffff?text=DJ'">
+                            </div>
+                            <div class="skill-badge-3d">SEO Strategy</div>
+                            <h4>David Jones</h4>
+                            <p class="client-title">E-commerce Director</p>
+                            <div class="rating-3d">★★★★★</div>
+                        </div>
+                        <div class="card-back">
+                            <p class="testimonial-text-3d">"Ahmad's SEO strategy took our store from page 3 to page 1 for 20+ keywords. Sales increased by 150% in 6 months."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- review 6: Consulting -->
+            <div class="slide-3d">
+                <div class="testimonial-card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="client-image-3d">
+                                <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/100x100/2b5a88/ffffff?text=LD'">
+                            </div>
+                            <div class="skill-badge-3d">Digital Strategy</div>
+                            <h4>Lisa Davis</h4>
+                            <p class="client-title">CTO, InnovateTech</p>
+                            <div class="rating-3d">★★★★★</div>
+                        </div>
+                        <div class="card-back">
+                            <p class="testimonial-text-3d">"Ahmad consulted on our digital transformation. His insights on architecture were invaluable."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- review 7: Android -->
+            <div class="slide-3d">
+                <div class="testimonial-card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="client-image-3d">
+                                <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/100x100/2b5a88/ffffff?text=RW'">
+                            </div>
+                            <div class="skill-badge-3d">Android App</div>
+                            <h4>Robert Wilson</h4>
+                            <p class="client-title">Technical Lead</p>
+                            <div class="rating-3d">★★★★★</div>
+                        </div>
+                        <div class="card-back">
+                            <p class="testimonial-text-3d">"Ahmad fixed our legacy app performance issues. User retention improved by 40% after the update."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- review 8: SEO -->
+            <div class="slide-3d">
+                <div class="testimonial-card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="client-image-3d">
+                                <img src="https://randomuser.me/api/portraits/women/54.jpg" alt="Client" onerror="this.src='https://via.placeholder.com/100x100/2b5a88/ffffff?text=PT'">
+                            </div>
+                            <div class="skill-badge-3d">SEO</div>
+                            <h4>Patricia Taylor</h4>
+                            <p class="client-title">Restaurant Owner</p>
+                            <div class="rating-3d">★★★★★</div>
+                        </div>
+                        <div class="card-back">
+                            <p class="testimonial-text-3d">"Local SEO campaign brought our business 300+ new customers in 2 months. Best investment ever!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 3D SLIDER STYLES (NO DOTS) ========= -->
+<style>
+    .testimonials-3d-section {
+        width: 100%;
+        padding: 100px 0 80px 0;
+        background: linear-gradient(135deg, #f8fbfe 0%, #eef3fc 100%);
+        overflow: hidden;
+        perspective: 1000px;
+    }
+
+    body.dark-mode .testimonials-3d-section {
+        background: linear-gradient(135deg, #0a121f 0%, #142433 100%);
+    }
+
+    .testimonials-header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding: 0 5%;
+    }
+
+    .testimonials-tag {
+        display: inline-block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #6f8faf;
+        margin-bottom: 10px;
+        background: rgba(111, 143, 175, 0.1);
+        padding: 5px 15px;
+        border-radius: 30px;
+    }
+
+    .testimonials-title {
+        font-size: 3rem;
+        font-weight: 600;
+        color: #1d2f42;
+        margin: 0 0 10px 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    }
+
+    body.dark-mode .testimonials-title {
+        color: #ecf3fc;
+    }
+
+    .title-accent {
+        color: #2b5a88;
+        position: relative;
+        display: inline-block;
+    }
+
+    .testimonials-desc {
+        font-size: 1.2rem;
+        color: #5f82a8;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* 3D slider container */
+    .slider-3d-container {
+        width: 100%;
+        overflow: hidden;
+        padding: 40px 0;
+        margin: 0 auto;
+    }
+
+    .slider-3d-track {
+        display: flex;
+        animation: slide3D 40s linear infinite;
+        gap: 30px;
+        padding: 20px 0;
+        width: max-content;
+    }
+
+    /* pause on hover */
+    .slider-3d-container:hover .slider-3d-track {
+        animation-play-state: paused;
+    }
+
+    @keyframes slide3D {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-50% - 15px));
+        }
+    }
+
+    /* 3D card styles */
+    .slide-3d {
+        flex: 0 0 350px;
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+    }
+
+    .testimonial-card-3d {
+        width: 100%;
+        height: 400px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+        cursor: pointer;
+        border-radius: 20px;
+    }
+
+    .slide-3d:hover .testimonial-card-3d {
+        transform: rotateY(180deg) scale(1.05);
+    }
+
+    .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transform-style: preserve-3d;
+    }
+
+    .card-front, .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        padding: 30px 25px;
+        box-shadow: 0 20px 40px -15px rgba(43, 80, 117, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-front {
+        background: linear-gradient(145deg, #ffffff, #f8fcff);
+        border: 1px solid rgba(255,255,255,0.8);
+        transform: rotateY(0deg);
+    }
+
+    body.dark-mode .card-front {
+        background: linear-gradient(145deg, #1a283c, #1f3147);
+        border-color: #2d4663;
+    }
+
+    .card-back {
+        background: linear-gradient(145deg, #2b5a88, #1e3f60);
+        color: white;
+        transform: rotateY(180deg);
+        text-align: center;
+    }
+
+    body.dark-mode .card-back {
+        background: linear-gradient(145deg, #2d5a88, #1f4a73);
+    }
+
+    .client-image-3d {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: 20px;
+        border: 4px solid #2b5a88;
+        box-shadow: 0 10px 20px -5px rgba(43, 90, 136, 0.3);
+        transition: all 0.3s;
+    }
+
+    .client-image-3d img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .skill-badge-3d {
+        display: inline-block;
+        background: #e3eefa;
+        color: #2b5a88;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 6px 18px;
+        border-radius: 30px;
+        margin-bottom: 15px;
+        letter-spacing: 0.5px;
+        transform: translateZ(20px);
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    .card-front h4 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #1d3449;
+        margin: 10px 0 5px 0;
+        transform: translateZ(30px);
+    }
+
+    body.dark-mode .card-front h4 {
+        color: #d4e4ff;
+    }
+
+    .client-title {
+        font-size: 0.9rem;
+        color: #6f8faf;
+        margin-bottom: 10px;
+        transform: translateZ(20px);
+    }
+
+    .rating-3d {
+        color: #ffb83b;
+        font-size: 1.2rem;
+        letter-spacing: 3px;
+        transform: translateZ(40px);
+        text-shadow: 0 2px 5px rgba(255, 184, 59, 0.3);
+    }
+
+    .testimonial-text-3d {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: white;
+        font-style: italic;
+        position: relative;
+        transform: translateZ(50px);
+        padding: 0 15px;
+    }
+
+    .testimonial-text-3d::before {
+        content: '"';
+        font-size: 4rem;
+        position: absolute;
+        left: -5px;
+        top: -30px;
+        opacity: 0.3;
+        font-family: serif;
+    }
+
+    .testimonial-text-3d::after {
+        content: '"';
+        font-size: 4rem;
+        position: absolute;
+        right: -5px;
+        bottom: -30px;
+        opacity: 0.3;
+        font-family: serif;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+        .slide-3d {
+            flex: 0 0 280px;
+        }
+        .testimonial-card-3d {
+            height: 380px;
+        }
+        .testimonials-title {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+
+<!-- ========== 3D SLIDER SCRIPT (NO DOTS) ========= -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const track = document.getElementById('slider3DTrack');
+        const slides = document.querySelectorAll('.slide-3d');
+        
+        // Clone slides for infinite effect
+        const slidesArray = Array.from(slides);
+        slidesArray.forEach(slide => {
+            const clone = slide.cloneNode(true);
+            track.appendChild(clone);
+        });
+        
+        // adjust animation duration based on number of slides
+        const totalSlides = slidesArray.length * 2;
+        const duration = totalSlides * 2.5; // 2.5 seconds per slide
+        track.style.animation = `slide3D ${duration}s linear infinite`;
+    });
+</script>
+
+
+
+<!-- ========== FAQ SECTION (15 questions - 5 per skill) ========= -->
+<section class="faq-section">
+    <div class="faq-container">
+        <div class="faq-header" data-aos="fade-up">
+            <span class="faq-tag">frequently asked</span>
+            <h2 class="faq-title">Questions About <span class="faq-accent">My Expertise</span></h2>
+            <p class="faq-desc">Everything you need to know about how I work and deliver results</p>
+        </div>
+
+        <!-- 3 cards in a row with 5 questions each -->
+        <div class="faq-grid">
+            <!-- Card 1: Android Development (5 questions) -->
+            <div class="faq-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-header">
+                    <div class="card-icon-wrapper android-bg">
+                        <span class="material-symbols-outlined">android</span>
+                    </div>
+                    <h3>Android Development</h3>
+                </div>
+                
+                <div class="faq-items">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">What Android versions do you support?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>I develop for Android 5.0 (Lollipop) and above, covering 95%+ of active devices. For enterprise apps, I can target specific versions as needed.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">Do you build both native and cross-platform?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>I specialize in native Android (Kotlin/Java) for optimal performance. For cross-platform needs, I recommend and implement Flutter/React Native based on project requirements.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">How do you handle app security?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>I implement industry best practices: data encryption, secure API communication, ProGuard/R8 obfuscation, and regular security audits to protect user data.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">How long does app development take?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Simple apps: 4-6 weeks, Medium complexity: 2-3 months, Complex enterprise apps: 4-6 months. I provide detailed timelines during consultation.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">Do you provide post-launch support?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! I offer 3 months of free bug fixes and support. Extended maintenance packages are available for ongoing updates and improvements.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: SEO Specialist (5 questions) -->
+            <div class="faq-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-header">
+                    <div class="card-icon-wrapper seo-bg">
+                        <span class="material-symbols-outlined">insights</span>
+                    </div>
+                    <h3>SEO Specialist</h3>
+                </div>
+                
+                <div class="faq-items">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">How soon can I see SEO results?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>You'll start seeing initial improvements in <strong>20-25 days</strong>! Complete optimization takes 3-6 months for maximum results, but rankings begin improving within weeks.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">What tools do you use for SEO?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>I use Ahrefs, SEMrush, Google Analytics 4, Search Console, Screaming Frog, and custom analytics tools for comprehensive SEO audits and tracking.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">Do you guarantee #1 rankings?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No ethical SEO professional can guarantee #1 rankings. I guarantee improved visibility, traffic growth, and better search presence through proven strategies.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">What's included in your SEO package?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Technical SEO audit, keyword research, on-page optimization, content strategy, backlink analysis, monthly reporting, and continuous performance monitoring.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">Do you work with local businesses?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely! I specialize in local SEO: Google My Business optimization, local citations, review management, and location-based keyword targeting.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Digital Consultant (5 questions) -->
+            <div class="faq-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-header">
+                    <div class="card-icon-wrapper consulting-bg">
+                        <span class="material-symbols-outlined">support_agent</span>
+                    </div>
+                    <h3>Digital Consultant</h3>
+                </div>
+                
+                <div class="faq-items">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">What does a digital consultant do?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>I help businesses make smart technology decisions: choosing the right tech stack, architecting scalable solutions, optimizing processes, and guiding digital transformation.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">How do you charge for consulting?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Flexible options: hourly rate for short-term advice, project-based fee for specific deliverables, or retainer for ongoing strategic partnership.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">Do you work with startups?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely! I love helping startups. I offer special packages for early-stage companies, including MVP planning, tech stack selection, and team mentorship.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">What industries do you specialize in?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>E-commerce, FinTech, Healthcare, Education, and SaaS. I've worked with 50+ clients across various industries and adapt quickly to new domains.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span class="question-text">Can you help with investor pitches?</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! I assist with technical due diligence, architecture documentation, and creating compelling tech narratives for investor presentations and funding rounds.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ STYLES ========= -->
+<style>
+    .faq-section {
+        width: 100%;
+        padding: 100px 5%;
+        background: linear-gradient(135deg, #f8fbfe 0%, #f0f7ff 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    body.dark-mode .faq-section {
+        background: linear-gradient(135deg, #0a121f 0%, #132237 100%);
+    }
+
+    .faq-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* header */
+    .faq-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .faq-tag {
+        display: inline-block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #5f82a8;
+        margin-bottom: 10px;
+        background: rgba(95, 130, 168, 0.1);
+        padding: 5px 15px;
+        border-radius: 30px;
+    }
+
+    .faq-title {
+        font-size: 3rem;
+        font-weight: 600;
+        color: #1d2f42;
+        margin: 0 0 10px 0;
+    }
+
+    body.dark-mode .faq-title {
+        color: #ecf3fc;
+    }
+
+    .faq-accent {
+        color: #5f9ea0;
+        position: relative;
+        display: inline-block;
+    }
+
+    .faq-accent::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: rgba(95, 158, 160, 0.2);
+        border-radius: 4px;
+        z-index: -1;
+    }
+
+    .faq-desc {
+        font-size: 1.2rem;
+        color: #5f82a8;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    body.dark-mode .faq-desc {
+        color: #adc4e2;
+    }
+
+    /* grid - 3 cards */
+    .faq-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    /* faq card */
+    .faq-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 28px;
+        padding: 30px 25px;
+        box-shadow: 0 20px 40px -15px rgba(43, 80, 117, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        transition: all 0.3s;
+        height: fit-content;
+    }
+
+    body.dark-mode .faq-card {
+        background: rgba(26, 40, 60, 0.8);
+        border-color: rgba(45, 70, 99, 0.8);
+    }
+
+    .faq-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 50px -20px #1f3f60;
+        border-color: #5f9ea0;
+    }
+
+    /* card header */
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid rgba(95, 158, 160, 0.2);
+    }
+
+    .card-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        border-radius: 30% 70% 70% 30% / 30% 50% 50% 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: iconMorph 6s ease-in-out infinite;
+    }
+
+    .android-bg {
+        background: linear-gradient(145deg, #3ddc84, #0f9d58);
+    }
+
+    .seo-bg {
+        background: linear-gradient(145deg, #5f9ea0, #4a7d7f);
+    }
+
+    .consulting-bg {
+        background: linear-gradient(145deg, #6c5b7b, #4a3b5c);
+    }
+
+    @keyframes iconMorph {
+        0%, 100% { border-radius: 30% 70% 70% 30% / 30% 50% 50% 70%; }
+        50% { border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; }
+    }
+
+    .card-icon-wrapper .material-symbols-outlined {
+        font-size: 32px;
+        color: white;
+    }
+
+    .card-header h3 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #1d3449;
+    }
+
+    body.dark-mode .card-header h3 {
+        color: #d4e4ff;
+    }
+
+    /* FAQ items */
+    .faq-items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .faq-item {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+    }
+
+    body.dark-mode .faq-item {
+        background: rgba(10, 20, 30, 0.5);
+    }
+
+    .faq-item:hover {
+        border-color: #5f9ea0;
+        background: rgba(95, 158, 160, 0.05);
+    }
+
+    .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .faq-item.active .faq-question {
+        background: rgba(95, 158, 160, 0.1);
+    }
+
+    .question-text {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #1d3449;
+        flex: 1;
+        padding-right: 15px;
+        line-height: 1.4;
+    }
+
+    body.dark-mode .question-text {
+        color: #d4e4ff;
+    }
+
+    .toggle-icon {
+        font-size: 1.5rem;
+        color: #5f9ea0;
+        font-weight: 300;
+        transition: transform 0.2s;
+        min-width: 24px;
+        text-align: center;
+    }
+
+    .faq-item.active .toggle-icon {
+        transform: rotate(45deg);
+    }
+
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    body.dark-mode .faq-answer {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 200px;
+    }
+
+    .faq-answer p {
+        padding: 0 16px 16px 16px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #4f6f8f;
+        margin: 0;
+    }
+
+    body.dark-mode .faq-answer p {
+        color: #adc4e2;
+    }
+
+    /* responsive */
+    @media (max-width: 1000px) {
+        .faq-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .faq-grid {
+            grid-template-columns: 1fr;
+        }
+        .faq-title {
+            font-size: 2.5rem;
+        }
+        .card-header h3 {
+            font-size: 1.4rem;
+        }
+    }
+</style>
+
+<!-- ========== FAQ SCRIPT ========= -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // close all other items in the same card
+                const parentCard = item.closest('.faq-card');
+                const siblings = parentCard.querySelectorAll('.faq-item');
+                
+                siblings.forEach(sibling => {
+                    if (sibling !== item && sibling.classList.contains('active')) {
+                        sibling.classList.remove('active');
+                    }
+                });
+                
+                // toggle current item
+                item.classList.toggle('active');
+            });
+        });
+    });
+</script>
+
+
+<!-- ========== TAGLINE ========= -->
+<div class="strategy-tagline-container">
+    <div class="strategy-tagline">
+        <span class="tagline-word strategy">Strategy</span>
+        <span class="tagline-symbol">⚡</span>
+        <span class="tagline-word execution">Execution</span>
+    </div>
+    <p class="tagline-sub">where vision becomes reality</p>
+</div>
+
+<!-- ========== TAGLINE STYLES ========= -->
+<style>
+    .strategy-tagline-container {
+        text-align: center;
+        padding: 60px 5% 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .strategy-tagline {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+    }
+
+    .tagline-word {
+        font-size: 3.5rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .strategy {
+        background: linear-gradient(135deg, #1e3f60, #2b5a88);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 3px 3px 6px rgba(43, 90, 136, 0.2);
+        animation: floatStrategy 3s ease-in-out infinite;
+    }
+
+    .execution {
+        background: linear-gradient(135deg, #2b5a88, #3f7ab3);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 3px 3px 6px rgba(43, 90, 136, 0.2);
+        animation: floatExecution 3s ease-in-out infinite;
+    }
+
+    .tagline-symbol {
+        font-size: 4rem;
+        color: #2b5a88;
+        opacity: 0.7;
+        animation: pulse 2s ease-in-out infinite;
+        filter: drop-shadow(0 0 10px rgba(43, 90, 136, 0.3));
+    }
+
+    .tagline-sub {
+        font-size: 1.2rem;
+        color: #5f82a8;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        padding: 0 20px;
+    }
+
+    .tagline-sub::before,
+    .tagline-sub::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 30px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #2b5a88);
+    }
+
+    .tagline-sub::before {
+        left: -30px;
+        background: linear-gradient(90deg, #2b5a88, transparent);
+    }
+
+    .tagline-sub::after {
+        right: -30px;
+        background: linear-gradient(90deg, transparent, #2b5a88);
+    }
+
+    /* animations */
+    @keyframes floatStrategy {
+        0%, 100% {
+            transform: translateY(0) rotate(-1deg);
+        }
+        50% {
+            transform: translateY(-5px) rotate(0deg);
+        }
+    }
+
+    @keyframes floatExecution {
+        0%, 100% {
+            transform: translateY(0) rotate(1deg);
+        }
+        50% {
+            transform: translateY(-5px) rotate(0deg);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+    }
+
+    /* dark mode adjustments */
+    body.dark-mode .strategy {
+        background: linear-gradient(135deg, #7fa3cc, #a6c2e2);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+
+    body.dark-mode .execution {
+        background: linear-gradient(135deg, #a6c2e2, #c3dafc);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+
+    body.dark-mode .tagline-symbol {
+        color: #a6c2e2;
+    }
+
+    body.dark-mode .tagline-sub {
+        color: #8fb1d0;
+    }
+
+    body.dark-mode .tagline-sub::before,
+    body.dark-mode .tagline-sub::after {
+        background: linear-gradient(90deg, transparent, #a6c2e2);
+    }
+
+    body.dark-mode .tagline-sub::before {
+        background: linear-gradient(90deg, #a6c2e2, transparent);
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+        .tagline-word {
+            font-size: 2.5rem;
+        }
+        .tagline-symbol {
+            font-size: 3rem;
+        }
+        .tagline-sub {
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+        .tagline-sub::before,
+        .tagline-sub::after {
+            width: 15px;
+        }
+    }
+</style>
+
+
+<!-- ========== PREMIUM 3D FOOTER ========= -->
+<footer class="premium-footer">
+    <div class="premium-container">
+        <div class="premium-grid">
+
+            <!-- ── BRAND COLUMN ── -->
+            <div class="premium-col brand-col">
+                <div class="brand-card">
+
+                    <!-- Beautiful AJ Logo Section -->
+                    <div class="aj-logo-section">
+                        <div class="aj-logo-orbit">
+                            <div class="aj-orbit-ring aj-ring-1"></div>
+                            <div class="aj-orbit-ring aj-ring-2"></div>
+                            <div class="aj-orbit-ring aj-ring-3"></div>
+                            <div class="aj-logo-core">
+                                <div class="aj-logo-glow"></div>
+                                <span class="aj-logo-text">AJ</span>
+                            </div>
+                        </div>
+                        <div class="aj-brand-info">
+                            <div class="brand-name">Ahmad Jamal</div>
+                            <div class="brand-tagline">Where strategy meets execution</div>
+                        </div>
+                    </div>
+
+                    <!-- Stats - GRID layout = no overflow -->
+                    <div class="stats-wrap">
+                        <div class="stat-flip">
+                            <div class="stat-flip-inner">
+                                <div class="stat-face stat-front">
+                                    <span class="stat-num" id="projectCounter">50+</span>
+                                    <span class="stat-lbl">Projects</span>
+                                </div>
+                                <div class="stat-face stat-back">
+                                    <span class="stat-num">50+</span>
+                                    <span class="stat-lbl">Completed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-flip">
+                            <div class="stat-flip-inner">
+                                <div class="stat-face stat-front">
+                                    <span class="stat-num">5+</span>
+                                    <span class="stat-lbl">Years</span>
+                                </div>
+                                <div class="stat-face stat-back">
+                                    <span class="stat-num">5+</span>
+                                    <span class="stat-lbl">Experience</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-flip">
+                            <div class="stat-flip-inner">
+                                <div class="stat-face stat-front">
+                                    <span class="stat-num">100%</span>
+                                    <span class="stat-lbl">Success</span>
+                                </div>
+                                <div class="stat-face stat-back">
+                                    <span class="stat-num">100%</span>
+                                    <span class="stat-lbl">Satisfaction</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rating -->
+                    <div class="rating-flip">
+                        <div class="rating-flip-inner">
+                            <div class="rating-face rating-front">
+                                <div class="stars-row">★★★★★</div>
+                                <span>Trusted worldwide</span>
+                            </div>
+                            <div class="rating-face rating-back">
+                                <span>⭐ 5.0 Average Rating</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ── QUICK LINKS ── -->
+            <div class="premium-col">
+                <h3 class="col-title-3d">Quick Links</h3>
+                <ul class="premium-links-3d">
+                    <li><a href="/" class="link-3d"><span class="link-3d-text">Home</span></a></li>
+                    <li><a href="/services" class="link-3d"><span class="link-3d-text">Services</span></a></li>
+                    <li><a href="/skills" class="link-3d"><span class="link-3d-text">Skills</span></a></li>
+                    <li><a href="/projects" class="link-3d"><span class="link-3d-text">Projects</span></a></li>
+                    <li><a href="/about" class="link-3d"><span class="link-3d-text">About</span></a></li>
+                    <li><a href="/contact" class="link-3d"><span class="link-3d-text">Contact</span></a></li>
+                </ul>
+            </div>
+
+            <!-- ── GET IN TOUCH ── -->
+            <div class="premium-col">
+                <h3 class="col-title-3d">Get in Touch</h3>
+                <ul class="premium-contact-3d">
+                    <li class="contact-3d-item">
+                        <div class="contact-3d-icon">📧</div>
+                        <div class="contact-3d-content">
+                            <!-- ✅ FIXED: Direct Gmail compose link - works in all browsers without any settings -->
+                            <a href="https://mail.google.com/mail/?view=cm&to=codewithahmadjamal@gmail.com&su=Project%20Inquiry" 
+                               class="contact-3d-link" 
+                               id="emailLink"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                codewithahmadjamal@gmail.com
+                            </a>
+                        </div>
+                    </li>
+                    <li class="contact-3d-item">
+                        <div class="contact-3d-icon">📱</div>
+                        <div class="contact-3d-content">
+                            <a href="https://wa.me/923076432010" 
+                               class="contact-3d-link"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                +92 307 6432010
+                            </a>
+                        </div>
+                    </li>
+                    <li class="contact-3d-item">
+                        <div class="contact-3d-icon">🌍</div>
+                        <div class="contact-3d-content">
+                            <span class="contact-3d-text">Available worldwide</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="availability-3d-wrapper">
+                    <a href="/contact" class="availability-3d-link">
+                        <div class="availability-3d-inner">
+                            <div class="avail-face avail-front contact-front">
+                                <span class="pulse-dot-3d"></span>
+                                <span>Contact me</span>
+                            </div>
+                            <div class="avail-face avail-back contact-back">
+                                <span>📧 Send email</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="https://wa.me/923076432010" class="availability-3d-link" target="_blank" rel="noopener noreferrer">
+                        <div class="availability-3d-inner">
+                            <div class="avail-face avail-front whatsapp-front">
+                                <span>WhatsApp</span>
+                            </div>
+                            <div class="avail-face avail-back whatsapp-back">
+                                <span>📱 Chat now</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ── SOCIAL MEDIA ── -->
+            <div class="premium-col">
+                <h3 class="col-title-3d">Social Media</h3>
+                <div class="social-3d-grid">
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/ahmad-jamal-dev" target="_blank" class="social-3d-card linkedin-3d">
+                        <div class="social-3d-front">
+                            <span class="social-3d-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.68-1.68-1.68a1.68 1.68 0 0 0-1.68 1.68c0 .93.76 1.68 1.68 1.68m1.39 4.52v8.37H5.5v-8.37h2.77z"/></svg>
+                            </span>
+                            <span class="social-3d-name">LinkedIn</span>
+                        </div>
+                        <div class="social-3d-back"><span>Connect</span><span class="social-3d-arrow">↗</span></div>
+                    </a>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/Ahmii100" target="_blank" class="social-3d-card github-3d">
+                        <div class="social-3d-front">
+                            <span class="social-3d-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                            </span>
+                            <span class="social-3d-name">GitHub</span>
+                        </div>
+                        <div class="social-3d-back"><span>Follow</span><span class="social-3d-arrow">↗</span></div>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/ahmadjamal.dev" target="_blank" class="social-3d-card instagram-3d">
+                        <div class="social-3d-front">
+                            <span class="social-3d-icon">
+                                <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.4 5.6 20 7.6 20h8.8c2 0 3.6-1.6 3.6-3.6V7.6C20 5.6 18.4 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+                            </span>
+                            <span class="social-3d-name">Instagram</span>
+                        </div>
+                        <div class="social-3d-back"><span>Follow</span><span class="social-3d-arrow">↗</span></div>
+                    </a>
+
+                    <!-- Upwork -->
+                    <a href="https://www.upwork.com/freelancers/~01842295234b58e718" target="_blank" class="social-3d-card upwork-3d">
+                        <div class="social-3d-front">
+                            <span class="social-3d-icon upwork-icon-bg">
+                                <svg viewBox="0 0 40 40" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M30.27 22.76c-1.73 0-3.36-.6-4.63-1.68l.35-1.65.01-.08c.3-1.69 1.26-4.53 4.27-4.53 2.24 0 4.06 1.82 4.06 4.06s-1.82 3.88-4.06 3.88zm0-13.01c-3.16 0-5.69 1.75-7.05 4.81-1.37-2.44-2.41-5.37-2.99-7.87H15.4v11.82c0 2.18-1.78 3.97-3.97 3.97-2.18 0-3.97-1.78-3.97-3.97V6.69H3.55v11.82c-.01 4.62 3.77 8.39 8.39 8.39 4.62 0 8.39-3.77 8.39-8.39V16.53c.57 1.27 1.26 2.57 2.08 3.75l-1.76 8.27h4.2l1.27-5.97c1.36.78 2.94 1.22 4.64 1.22 4.97 0 9.03-4.06 9.03-9.03.01-4.97-4.05-8.02-9.02-8.02z"/>
+                                </svg>
+                            </span>
+                            <span class="social-3d-name">Upwork</span>
+                        </div>
+                        <div class="social-3d-back"><span>Hire me</span><span class="social-3d-arrow">↗</span></div>
+                    </a>
+
+                    <!-- Fiverr -->
+                    <a href="https://www.fiverr.com/s/YRApXmQ" target="_blank" class="social-3d-card fiverr-3d">
+                        <div class="social-3d-front">
+                            <span class="social-3d-icon fiverr-icon-bg">
+                                <svg viewBox="0 0 40 40" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M27.3 7.5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM8 25.8h4.4v-9.1H8v-3.3h4.4v-1.7C12.4 8.3 14.3 6 18.2 6c1.3 0 2.6.2 3.8.5l-.7 3.3c-.7-.2-1.3-.3-2-.3-1.5 0-2.2.8-2.2 2.4v1.5h3.8v3.3h-3.8v9.1H21v3.3H8v-3.3z"/>
+                                </svg>
+                            </span>
+                            <span class="social-3d-name">Fiverr</span>
+                        </div>
+                        <div class="social-3d-back"><span>Order</span><span class="social-3d-arrow">↗</span></div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ── BOTTOM BAR ── -->
+        <div class="premium-bottom">
+            <div class="copyright">
+                <p>© 2025 Ahmad Jamal. All rights reserved.</p>
+            </div>
+            <a href="https://maps.app.goo.gl/NGeHqtLZgfReQiDR8?g_st=iw" target="_blank" rel="noopener" class="location-3d-tag">
+                <span class="location-pin-3d"></span>
+                <span>Lahore, Pakistan</span>
+                <span class="flag-3d">🇵🇰</span>
+                <span class="loc-arrow">↗</span>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- ========== STYLES ========= -->
+<style>
+/* ── FOOTER SHELL ── */
+.premium-footer {
+    width: 100%;
+    background: linear-gradient(135deg, #0a1420 0%, #1a2c40 100%);
+    color: #fff;
+    padding: 70px 5% 30px;
+    margin-top: 70px;
+    position: relative;
+    overflow: hidden;
+}
+body:not(.dark-mode) .premium-footer {
+    background: linear-gradient(135deg, #1e3f60 0%, #2b4a6e 100%);
+}
+.premium-container { max-width: 1400px; margin: 0 auto; position: relative; z-index: 10; }
+
+/* ── GRID ── */
+.premium-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr 2fr;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+/* ── BRAND CARD ── */
+.brand-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 28px 22px;
+    border: 1px solid rgba(95,158,160,0.25);
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* ── AJ LOGO SECTION ── */
+.aj-logo-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 26px;
+    flex-wrap: wrap;
+}
+.aj-logo-orbit {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
+}
+.aj-orbit-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid rgba(95,158,160,0.3);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: ringPulse 3s ease-in-out infinite;
+    pointer-events: none;
+}
+.aj-ring-1 { width: 76px;  height: 76px;  border-color: rgba(95,158,160,0.45); animation-delay: 0s;    }
+.aj-ring-2 { width: 96px;  height: 96px;  border-color: rgba(95,158,160,0.22); animation-delay: 0.7s;  }
+.aj-ring-3 { width: 116px; height: 116px; border-color: rgba(95,158,160,0.1);  animation-delay: 1.4s;  }
+@keyframes ringPulse {
+    0%,100% { opacity:0.5; transform: translate(-50%,-50%) scale(1); }
+    50%      { opacity:1;   transform: translate(-50%,-50%) scale(1.07); }
+}
+.aj-logo-core {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 68px; height: 68px;
+    background: linear-gradient(135deg, #72c4c6 0%, #3d8a8c 45%, #265c5e 100%);
+    border-radius: 38% 62% 58% 42% / 42% 38% 62% 58%;
+    display: flex; align-items: center; justify-content: center;
+    animation: morphBlob 9s ease-in-out infinite, floatBlob 5s ease-in-out infinite;
+    box-shadow:
+        0 0 0 2px rgba(95,158,160,0.35),
+        0 10px 28px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        0 0 40px rgba(95,158,160,0.22);
+    overflow: hidden;
+}
+@keyframes morphBlob {
+    0%,100% { border-radius: 38% 62% 58% 42% / 42% 38% 62% 58%; }
+    33%      { border-radius: 55% 45% 38% 62% / 62% 45% 55% 38%; }
+    66%      { border-radius: 68% 32% 52% 48% / 36% 64% 36% 64%; }
+}
+@keyframes floatBlob {
+    0%,100% { transform: translate(-50%,-50%) translateY(0); }
+    50%      { transform: translate(-50%,-50%) translateY(-5px); }
+}
+.aj-logo-glow {
+    position: absolute;
+    top: -15%; left: -15%;
+    width: 50%; height: 50%;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    filter: blur(7px);
+    animation: glowDrift 6s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes glowDrift {
+    0%,100% { top: -15%; left: -15%; opacity: 0.9; }
+    50%      { top:  45%; left:  45%; opacity: 0.3; }
+}
+.aj-logo-text {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 3px;
+    position: relative; z-index: 2;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.45), 0 0 18px rgba(255,255,255,0.1);
+}
+.aj-brand-info { flex: 1; min-width: 0; }
+.brand-name {
+    font-size: 1.5rem; font-weight: 700; color: #fff;
+    line-height: 1.2;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+.brand-tagline {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* ── STATS ── */
+.stats-wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+    margin-bottom: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.stat-flip { height: 80px; perspective: 600px; }
+.stat-flip-inner {
+    position: relative; width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+.stat-flip:hover .stat-flip-inner { transform: rotateY(180deg); }
+.stat-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border-radius: 13px; padding: 8px 4px;
+    box-sizing: border-box;
+    border: 1px solid rgba(95,158,160,0.2);
+}
+.stat-front { background: rgba(255,255,255,0.07); }
+.stat-back  { background: rgba(95,158,160,0.22); transform: rotateY(180deg); }
+.stat-num {
+    font-size: clamp(0.95rem, 1.8vw, 1.55rem);
+    font-weight: 700; color: #7ec8ca;
+    line-height: 1.1; display: block;
+}
+.stat-lbl {
+    font-size: clamp(0.5rem, 0.8vw, 0.68rem);
+    color: rgba(255,255,255,0.65);
+    text-transform: uppercase; letter-spacing: 0.7px; margin-top: 3px;
+}
+
+/* ── RATING ── */
+.rating-flip { height: 62px; perspective: 700px; margin-top: 10px; }
+.rating-flip-inner {
+    position: relative; width: 100%; height: 100%;
+    transform-style: preserve-3d; transition: transform 0.65s; cursor: pointer;
+}
+.rating-flip:hover .rating-flip-inner { transform: rotateX(180deg); }
+.rating-face {
+    position: absolute; inset: 0; backface-visibility: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border-radius: 13px; border: 1px solid rgba(95,158,160,0.2);
+    font-size: 0.88rem; color: rgba(255,255,255,0.85);
+}
+.rating-front { background: rgba(255,255,255,0.07); }
+.rating-back  { background: rgba(95,158,160,0.22); transform: rotateX(-180deg); font-weight: 600; }
+.stars-row { color: #ffb83b; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 4px; }
+
+/* ── COL TITLES ── */
+.col-title-3d {
+    font-size: 1.2rem; font-weight: 600; color: #fff;
+    margin-bottom: 22px; position: relative; padding-bottom: 10px;
+}
+.col-title-3d::after {
+    content:''; position:absolute; bottom:0; left:0;
+    width:42px; height:2px;
+    background: linear-gradient(90deg, #5f9ea0, transparent);
+}
+
+/* ── LINKS ── */
+.premium-links-3d { list-style: none; padding: 0; }
+.premium-links-3d li { margin-bottom: 13px; }
+.link-3d { display: inline-block; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.97rem; position: relative; }
+.link-3d-text { display: inline-block; transition: transform 0.3s; }
+.link-3d:hover .link-3d-text { transform: translateX(6px); color: #fff; }
+.link-3d::before { content:'→'; position:absolute; left:-18px; opacity:0; transition:all 0.3s; color:#5f9ea0; }
+.link-3d:hover::before { opacity:1; left:-4px; }
+
+/* ── CONTACT ── */
+.premium-contact-3d { list-style: none; padding: 0; margin-bottom: 14px; }
+.contact-3d-item {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 11px; padding: 8px 11px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 11px; border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.3s;
+}
+.contact-3d-item:hover {
+    transform: translateX(4px);
+    background: rgba(95,158,160,0.1);
+    border-color: rgba(95,158,160,0.3);
+}
+.contact-3d-icon { font-size: 1.15rem; min-width: 26px; }
+.contact-3d-content { flex: 1; min-width: 0; overflow: hidden; }
+.contact-3d-link, .contact-3d-text {
+    color: rgba(255,255,255,0.88); text-decoration: none; font-size: 0.9rem;
+    display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.contact-3d-link:hover { color: #7ec8ca; }
+
+/* ── CTA BUTTONS ── */
+.availability-3d-wrapper { display: flex; gap: 9px; margin-top: 13px; }
+.availability-3d-link {
+    flex: 1; text-decoration: none; height: 48px;
+    perspective: 700px; display: block;
+}
+.availability-3d-inner {
+    position: relative; width: 100%; height: 100%;
+    transform-style: preserve-3d; transition: transform 0.55s; cursor: pointer;
+}
+.availability-3d-link:hover .availability-3d-inner { transform: rotateX(180deg); }
+.avail-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    border-radius: 40px; font-size: 0.88rem; font-weight: 600; color: #fff;
+}
+.avail-back { transform: rotateX(180deg); }
+.contact-front  { background: rgba(95,158,160,0.22); border: 1px solid rgba(95,158,160,0.5); }
+.contact-back   { background: #5f9ea0; }
+.whatsapp-front { background: rgba(37,211,102,0.22); border: 1px solid rgba(37,211,102,0.5); }
+.whatsapp-back  { background: #25d366; }
+.pulse-dot-3d {
+    width: 7px; height: 7px; background: #4caf50; border-radius: 50%; flex-shrink: 0;
+    box-shadow: 0 0 7px #4caf50;
+    animation: pulseDot 1.5s ease-in-out infinite;
+}
+@keyframes pulseDot {
+    0%,100% { transform:scale(1); opacity:1; }
+    50%      { transform:scale(1.6); opacity:0.7; }
+}
+
+/* ── SOCIAL CARDS ── */
+.social-3d-grid { display: flex; flex-direction: column; gap: 9px; }
+.social-3d-card { position: relative; height: 54px; text-decoration: none; color: #fff; perspective: 700px; }
+.social-3d-front, .social-3d-back {
+    position: absolute; inset: 0; backface-visibility: hidden;
+    display: flex; align-items: center; padding: 0 13px; gap: 11px;
+    border-radius: 13px; transition: transform 0.55s;
+}
+.social-3d-front { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; }
+.social-3d-back  { background: rgba(95,158,160,0.25); transform: rotateY(180deg); justify-content: space-between; color: #fff; }
+.social-3d-card:hover .social-3d-front { transform: rotateY(180deg); }
+.social-3d-card:hover .social-3d-back  { transform: rotateY(360deg); }
+.social-3d-icon {
+    width: 34px; height: 34px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.1); border-radius: 9px;
+}
+.upwork-icon-bg { background: rgba(20,168,0,0.2); }
+.fiverr-icon-bg { background: rgba(29,191,115,0.2); }
+.social-3d-name { font-size: 0.95rem; }
+.social-3d-arrow { font-size: 1.1rem; margin-right: 6px; }
+
+.linkedin-3d:hover   .social-3d-back { background: #0077b5; }
+.github-3d:hover     .social-3d-back { background: #24292e; }
+.instagram-3d:hover  .social-3d-back { background: linear-gradient(45deg,#f09433,#d62976,#962fbf); }
+.upwork-3d:hover     .social-3d-back { background: #14a800; }
+.fiverr-3d:hover     .social-3d-back { background: #1dbf73; }
+
+/* ── BOTTOM BAR ── */
+.premium-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 26px; border-top: 1px solid rgba(95,158,160,0.3);
+    flex-wrap: wrap; gap: 14px;
+}
+.copyright p { color: rgba(255,255,255,0.55); font-size: 0.9rem; margin: 0; }
+.location-3d-tag {
+    display: flex; align-items: center; gap: 7px;
+    color: rgba(255,255,255,0.8); font-size: 0.9rem;
+    padding: 7px 16px;
+    background: rgba(95,158,160,0.1);
+    border-radius: 40px; border: 1px solid rgba(95,158,160,0.22);
+    text-decoration: none; transition: all 0.3s;
+}
+.location-3d-tag:hover {
+    background: rgba(95,158,160,0.22); border-color: rgba(95,158,160,0.5);
+    transform: translateY(-2px); color: #fff;
+    box-shadow: 0 6px 16px rgba(95,158,160,0.18);
+}
+.location-pin-3d { animation: pinBounce 3s ease-in-out infinite; display: inline-block; }
+@keyframes pinBounce {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+}
+.loc-arrow { font-size: 0.75rem; opacity: 0.6; }
+.location-3d-tag:hover .loc-arrow { opacity: 1; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+    .premium-grid { grid-template-columns: repeat(2,1fr); gap: 28px; }
+}
+@media (max-width: 800px) {
+    .premium-grid { grid-template-columns: 1fr; }
+    .premium-bottom { flex-direction: column; text-align: center; justify-content: center; }
+    .availability-3d-wrapper { flex-direction: column; }
+}
+@media (max-width: 420px) {
+    .stat-num  { font-size: 0.95rem; }
+    .stat-lbl  { font-size: 0.5rem; }
+    .brand-name { font-size: 1.25rem; }
+    .aj-logo-orbit { width: 64px; height: 64px; }
+    .aj-logo-core  { width: 58px; height: 58px; }
+    .aj-ring-1 { width: 64px;  height: 64px;  }
+    .aj-ring-2 { width: 82px;  height: 82px;  }
+    .aj-ring-3 { width: 100px; height: 100px; }
+}
+</style>
+
+<!-- ========== COUNTER SCRIPT ========= -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var el = document.getElementById('projectCounter');
+    if (!el) return;
+    function animateCounter() {
+        var count = 0, target = 50, inc = target / (2000 / 16);
+        (function tick() {
+            count += inc;
+            if (count < target) { el.textContent = Math.floor(count) + '+'; requestAnimationFrame(tick); }
+            else el.textContent = target + '+';
+        })();
+    }
+    var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateCounter(); obs.unobserve(e.target); } });
+    }, { threshold: 0.4 });
+    var footer = document.querySelector('.premium-footer');
+    if (footer) obs.observe(footer);
+});
+</script>
+
+</body>
+</html>

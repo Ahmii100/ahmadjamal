@@ -1,0 +1,704 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmad Jamal · About</title>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+    <!-- Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f2f6fc;
+            color: #1d2b3c;
+            transition: background-color 0.3s ease, color 0.25s ease;
+        }
+
+        body.dark-mode {
+            background: #0f1724;
+            color: #eef3fd;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar-custom {
+            backdrop-filter: blur(16px) saturate(200%);
+            -webkit-backdrop-filter: blur(16px) saturate(200%);
+            box-shadow: 0 8px 24px -12px rgba(60, 80, 105, 0.15);
+            padding: 0.6rem 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.6);
+            transition: background 0.3s;
+            position: sticky;
+            top: 0;
+            z-index: 1050;
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        body.dark-mode .navbar-custom {
+            background: rgba(10, 20, 30, 0.85);
+            border-bottom: 1px solid #253c54;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.02) translateX(4px);
+        }
+
+        .logo-block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #1f3a52, #2b5075);
+            width: 56px;
+            height: 56px;
+            border-radius: 30% 70% 70% 30% / 30% 50% 50% 70%;
+            box-shadow: 0 12px 20px -12px #2f4b6e;
+            color: white;
+            font-size: 30px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .brand-logo:hover .logo-block {
+            border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
+            background: linear-gradient(145deg, #2a4a6e, #31638b);
+        }
+
+        .brand-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1f3a52;
+            letter-spacing: -0.02em;
+            transition: color 0.2s;
+        }
+
+        body.dark-mode .brand-text {
+            color: #d0e2ff;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.3rem;
+            font-weight: 550;
+            color: #2b4058;
+            border-radius: 40px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        body.dark-mode .nav-btn {
+            color: #d0e2ff;
+        }
+
+        .nav-btn:hover {
+            background: rgba(70, 110, 160, 0.06);
+            transform: translateY(-2px);
+            color: #0b2339;
+        }
+
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: #8fb1d0;
+            border-radius: 4px;
+            transform: translateX(-50%);
+            transition: width 0.2s;
+        }
+
+        .nav-btn:hover::after {
+            width: 30%;
+        }
+
+        #theme-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            color: #2b4a70;
+        }
+
+        #theme-toggle .material-symbols-outlined {
+            font-size: 32px;
+        }
+
+        #theme-toggle:hover {
+            background: rgba(130, 170, 210, 0.15);
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        body.dark-mode #theme-toggle {
+            color: #ffdba0;
+        }
+
+        /* ===== ABOUT PAGE ===== */
+        .about-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #6f8faf;
+            background: rgba(111, 143, 175, 0.1);
+            padding: 6px 18px;
+            border-radius: 40px;
+            margin-bottom: 1rem;
+        }
+
+        .about-title {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #1d2f42;
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .about-title {
+            color: #ecf3fc;
+        }
+
+        .about-title span {
+            color: #5f9ea0;
+        }
+
+        .about-subtitle {
+            font-size: 1.2rem;
+            color: #5f82a8;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ===== PROFILE SECTION ===== */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+            border: 1px solid #e6eef8;
+        }
+
+        body.dark-mode .profile-grid {
+            background: #1a283c;
+            border-color: #2d4663;
+        }
+
+        .profile-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #e3eefa;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .profile-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1d3449;
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .profile-content h2 {
+            color: #d4e4ff;
+        }
+
+        .profile-content p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #4f6f8f;
+            margin-bottom: 1.5rem;
+        }
+
+        body.dark-mode .profile-content p {
+            color: #adc4e2;
+        }
+
+        /* ===== TRUST METRICS - IMPROVED ===== */
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .trust-card {
+            background: #ffffff;
+            border: 1px solid #e6eef8;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        body.dark-mode .trust-card {
+            background: #1a283c;
+            border-color: #2d4663;
+        }
+
+        .trust-card:hover {
+            border-color: #5f9ea0;
+            transform: translateY(-2px);
+        }
+
+        .trust-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #5f9ea0;
+            display: block;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+        }
+
+        .trust-label {
+            font-size: 0.85rem;
+            color: #4f6f8f;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        body.dark-mode .trust-label {
+            color: #adc4e2;
+        }
+
+        /* ===== EXPERTISE CARDS ===== */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .expertise-card {
+            background: #ffffff;
+            border: 1px solid #e6eef8;
+            border-radius: 20px;
+            padding: 1.8rem;
+            transition: all 0.2s;
+        }
+
+        body.dark-mode .expertise-card {
+            background: #1a283c;
+            border-color: #2d4663;
+        }
+
+        .expertise-card:hover {
+            border-color: #5f9ea0;
+        }
+
+        .expertise-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1d3449;
+            margin-bottom: 0.8rem;
+        }
+
+        body.dark-mode .expertise-title {
+            color: #d4e4ff;
+        }
+
+        .expertise-desc {
+            font-size: 0.95rem;
+            color: #4f6f8f;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .expertise-desc {
+            color: #adc4e2;
+        }
+
+        /* ===== EXPERIENCE SECTION ===== */
+        .experience-section {
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid #e6eef8;
+        }
+
+        body.dark-mode .experience-section {
+            background: #1a283c;
+            border-color: #2d4663;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1d3449;
+            margin-bottom: 2rem;
+        }
+
+        body.dark-mode .section-title {
+            color: #d4e4ff;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .experience-item {
+            padding: 1rem;
+            border-left: 2px solid #e0eaf5;
+        }
+
+        body.dark-mode .experience-item {
+            border-left-color: #2d4663;
+        }
+
+        .experience-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1d3449;
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-mode .experience-item h3 {
+            color: #d4e4ff;
+        }
+
+        .experience-item p {
+            color: #4f6f8f;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .experience-item p {
+            color: #adc4e2;
+        }
+
+        /* ===== SHOPIFY SECTION ===== */
+        .shopify-section {
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid #e6eef8;
+        }
+
+        body.dark-mode .shopify-section {
+            background: #1a283c;
+            border-color: #2d4663;
+        }
+
+        .shopify-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .shopify-content h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1d3449;
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .shopify-content h3 {
+            color: #d4e4ff;
+        }
+
+        .shopify-content p {
+            font-size: 1rem;
+            color: #4f6f8f;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        body.dark-mode .shopify-content p {
+            color: #adc4e2;
+        }
+
+        .shopify-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .shopify-stat {
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .shopify-stat .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #5f9ea0;
+            display: block;
+            line-height: 1.2;
+        }
+
+        .shopify-stat .label {
+            font-size: 0.9rem;
+            color: #4f6f8f;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+            .trust-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .expertise-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .trust-grid,
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-title {
+                font-size: 2.2rem;
+            }
+            .shopify-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar-custom">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <span class="logo-block">AJ</span>
+                <span class="brand-text">Ahmad Jamal</span>
+            </a>
+
+            <div class="nav-center">
+                <a href="/" class="nav-btn">Home</a>
+                <a href="/projects/" class="nav-btn">Projects</a>
+                <a href="/skills/" class="nav-btn">Skills</a>
+                <a href="/services/" class="nav-btn">Services</a>
+                <a href="/about/" class="nav-btn">About</a>
+                <a href="/contact/" class="nav-btn">Contact</a>
+            </div>
+
+            <div class="nav-right">
+                <button id="theme-toggle" title="light/dark">
+                    <span class="material-symbols-outlined">dark_mode</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ABOUT PAGE -->
+    <div class="about-container">
+        <!-- Header -->
+        <div class="about-header" data-aos="fade-up">
+            <div class="about-tag">About Me</div>
+            <h1 class="about-title">Crafting <span>Digital Excellence</span></h1>
+            <p class="about-subtitle">Android Developer · SEO Specialist · Digital Consultant based in Lahore, Pakistan</p>
+        </div>
+
+        <!-- Profile Section - IMAGE FIXED -->
+        <div class="profile-grid" data-aos="fade-up">
+            <div class="profile-image">
+                <img src="{% static 'images/jamalabout.jpeg' %}" alt="Ahmad Jamal" onerror="this.src='https://placehold.co/400x400/2b5a88/white?text=AJ'">
+            </div>
+            <div class="profile-content">
+                <h2>Ahmad Jamal</h2>
+                <p>With over 5 years of experience in Android development, SEO optimization, and digital consulting, I've helped 50+ businesses across 15 countries achieve their digital goals. My approach combines technical expertise with strategic thinking to deliver results that matter.</p>
+                <p>Based in Lahore, Pakistan, I work with clients worldwide, helping them build powerful mobile applications, improve search visibility, and make smart technology decisions.</p>
+            </div>
+        </div>
+
+        <!-- Trust Metrics - IMPROVED with 4 columns -->
+        <div class="trust-grid" data-aos="fade-up">
+            <div class="trust-card">
+                <span class="trust-number">50+</span>
+                <span class="trust-label">Projects</span>
+            </div>
+            <div class="trust-card">
+                <span class="trust-number">15+</span>
+                <span class="trust-label">Countries</span>
+            </div>
+            <div class="trust-card">
+                <span class="trust-number">5+</span>
+                <span class="trust-label">Years</span>
+            </div>
+            <div class="trust-card">
+                <span class="trust-number">100%</span>
+                <span class="trust-label">Success</span>
+            </div>
+        </div>
+
+        <!-- Expertise -->
+        <div class="expertise-grid" data-aos="fade-up">
+            <div class="expertise-card">
+                <div class="expertise-title">Android Development</div>
+                <div class="expertise-desc">Native Android apps with modern architecture, Kotlin, Jetpack, and Firebase. Focus on clean code and exceptional user experience.</div>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-title">SEO Specialist</div>
+                <div class="expertise-desc">Data-driven SEO strategies that improve rankings, increase traffic, and drive conversions. Technical SEO and content optimization.</div>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-title">Digital Consultant</div>
+                <div class="expertise-desc">Strategic guidance for digital transformation, tech stack selection, and growth planning. Helping businesses scale effectively.</div>
+            </div>
+        </div>
+
+        <!-- Experience Highlights -->
+        <div class="experience-section" data-aos="fade-up">
+            <h2 class="section-title">Experience & Achievements</h2>
+            <div class="experience-grid">
+                <div class="experience-item">
+                    <h3>Android Development</h3>
+                    <p>30+ apps developed including e-commerce, fitness, and enterprise solutions with 4.8+ average rating on Google Play.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>SEO Success</h3>
+                    <p>200% average traffic increase for clients through technical SEO, keyword strategy, and content optimization.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Consulting</h3>
+                    <p>Advised 20+ startups on technology architecture, team building, and product strategy from idea to launch.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Global Clients</h3>
+                    <p>Worked with clients from USA, UK, Europe, Middle East, and Asia delivering high-quality solutions remotely.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shopify Section -->
+        <div class="shopify-section" data-aos="fade-up">
+            <div class="shopify-content">
+                <h3>Shopify Expertise</h3>
+                <p>I help Shopify store owners increase sales through custom development, theme optimization, and SEO strategies. From app integration to speed optimization, I ensure your store performs at its best.</p>
+                <div class="shopify-stats">
+                    <div class="shopify-stat">
+                        <span class="number">20+</span>
+                        <span class="label">Stores</span>
+                    </div>
+                    <div class="shopify-stat">
+                        <span class="number">300%</span>
+                        <span class="label">Traffic Boost</span>
+                    </div>
+                    <div class="shopify-stat">
+                        <span class="number">50+</span>
+                        <span class="label">Apps</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+    <!-- THEME TOGGLE -->
+    <script>
+        (function() {
+            const body = document.body;
+            const themeBtn = document.getElementById('theme-toggle');
+            
+            if (themeBtn) {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    body.classList.add('dark-mode');
+                }
+                
+                function updateThemeIcon() {
+                    const iconSpan = themeBtn.querySelector('.material-symbols-outlined');
+                    if (iconSpan) {
+                        iconSpan.textContent = body.classList.contains('dark-mode') ? 'light_mode' : 'dark_mode';
+                    }
+                }
+                
+                themeBtn.addEventListener('click', function() {
+                    body.classList.toggle('dark-mode');
+                    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+                    updateThemeIcon();
+                });
+                
+                updateThemeIcon();
+            }
+        })();
+    </script>
+</body>
+</html>
