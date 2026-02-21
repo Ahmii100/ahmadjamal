@@ -5,8 +5,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Existing settings...
 SECRET_KEY = 'django-insecure-mfh8^7%m=b5fa49*i1_il3qm&kmc+6ss$=$fxn1=yf^--lp6dr'
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['jamalshakeelahmad.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -84,4 +84,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'ahmadjamalshakeel2004@gmail.com'
 EMAIL_HOST_PASSWORD = 'zsugucmbbwvixkke'  # Your app password (no spaces)
+
 DEFAULT_FROM_EMAIL = 'ahmadjamalshakeel2004@gmail.com'
