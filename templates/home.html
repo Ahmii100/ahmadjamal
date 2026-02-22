@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -466,7 +467,7 @@
             <!-- right image with white background blend -->
             <div class="hero-image" data-aos="fade-left" data-aos-duration="700" data-aos-delay="50">
                 <div class="image-frame">
-                    <img src="static/images/jamalpic.jpeg" alt="Ahmad Jamal" onerror="this.src='https://placehold.co/400x400/ffffff/e9eef2?text=Ahmad+Jamal'">
+                    <img src={% static 'images/jamalpic.jpeg' %} alt="Ahmad Jamal" onerror="this.src='https://placehold.co/400x400/ffffff/e9eef2?text=Ahmad+Jamal'">
                 </div>
             </div>
         </div>
@@ -3010,4 +3011,5 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 </body>
+
 </html>
